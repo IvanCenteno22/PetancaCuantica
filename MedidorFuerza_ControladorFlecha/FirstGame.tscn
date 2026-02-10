@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cncb1xybfwuw1"]
+[gd_scene load_steps=10 format=3 uid="uid://cncb1xybfwuw1"]
 
 [ext_resource type="Script" uid="uid://cb06ru1i6p47i" path="res://src/ControladorFlecha.cs" id="1_avh0g"]
 [ext_resource type="Texture2D" uid="uid://bucan8vfyw8mp" path="res://Imagen/ImagenFlecha.png" id="2_4dlvo"]
 [ext_resource type="Script" uid="uid://cqyvnu6sfwyb" path="res://src/MedidorFuerza.cs" id="4_r22ry"]
 [ext_resource type="Texture2D" uid="uid://gj2h36or5xyp" path="res://Imagen/BolaPetancaCuantica.png" id="4_riga8"]
+[ext_resource type="Texture2D" uid="uid://c46jjcauxv5bq" path="res://Imagen/Diana.png" id="5_riga8"]
 
 [sub_resource type="Gradient" id="Gradient_avh0g"]
 offsets = PackedFloat32Array(0, 0.61013216, 0.6431718)
@@ -37,15 +38,64 @@ scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("2_4dlvo")
 script = ExtResource("1_avh0g")
 
+[node name="Node2D" type="Node2D" parent="."]
+scale = Vector2(0.09, 0.09)
+
+[node name="PelotaA" type="RigidBody2D" parent="Node2D"]
+scale = Vector2(0.2, 0.2)
+gravity_scale = 0.0
+linear_damp = 3.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/PelotaA"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_riga8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/PelotaA"]
+scale = Vector2(0.2, 0.2)
+
+[node name="PelotaB" type="RigidBody2D" parent="Node2D"]
+scale = Vector2(0.2, 0.2)
+gravity_scale = 0.0
+linear_damp = 3.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/PelotaB"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_riga8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/PelotaB"]
+scale = Vector2(0.2, 0.2)
+
+[node name="LineaProyeccionA" type="Line2D" parent="Node2D"]
+position = Vector2(-9.111112, -742.44446)
+rotation = -1.5707964
+points = PackedVector2Array(0, 0, 0, 0)
+width = 2.0
+default_color = Color(0.6431373, 1, 1, 0.81960785)
+
+[node name="LineaProyeccionB" type="Line2D" parent="Node2D"]
+position = Vector2(-9.111112, -742.44446)
+rotation = -1.5707964
+points = PackedVector2Array(0, 0, 0, 0)
+width = 2.0
+default_color = Color(1, 0.7137255, 0.7019608, 0.81960785)
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -239)
 
-[node name="NodeBarraFuerza" type="Node2D" parent="." node_paths=PackedStringArray("FlechaPivote", "BarraVisual", "Pelota")]
+[node name="NodeBarraFuerza" type="Node2D" parent="." node_paths=PackedStringArray("ScriptFlecha", "BarraVisual", "PelotaA", "PelotaB", "LineaA", "LineaB", "PuntoColapso", "Objetivo", "MarcaAzul", "MarcaRojo", "LabelInfo")]
 script = ExtResource("4_r22ry")
-FlechaPivote = NodePath("../ImagenFlechaNode/SpriteImagenFlecha")
+ScriptFlecha = NodePath("../ImagenFlechaNode/SpriteImagenFlecha")
 BarraVisual = NodePath("BarraFuerza")
-Pelota = NodePath("../Node2D/PelotaRigiBody")
-GradosCorreccion = -90.0
+PelotaA = NodePath("../Node2D/PelotaA")
+PelotaB = NodePath("../Node2D/PelotaB")
+LineaA = NodePath("../Node2D/LineaProyeccionA")
+LineaB = NodePath("../Node2D/LineaProyeccionB")
+PuntoColapso = NodePath("../PuntoColapso")
+VelocidadOscilacion = 12.0
+Objetivo = NodePath("../Objetivo")
+MarcaAzul = NodePath("../MarcaAzul")
+MarcaRojo = NodePath("../MarcaRojo")
+LabelInfo = NodePath("../Label")
 
 [node name="BarraFuerza" type="TextureProgressBar" parent="NodeBarraFuerza"]
 offset_left = -520.0
@@ -53,22 +103,41 @@ offset_top = -522.0
 offset_right = 504.0
 offset_bottom = 1014.0
 scale = Vector2(0.22989358, 0.22989358)
-value = 100.0
+value = 90.0
 fill_mode = 3
 texture_under = SubResource("GradientTexture2D_r22ry")
 texture_progress = SubResource("GradientTexture2D_hitje")
 
-[node name="Node2D" type="Node2D" parent="."]
-scale = Vector2(0.09, 0.09)
-
-[node name="PelotaRigiBody" type="RigidBody2D" parent="Node2D"]
-scale = Vector2(0.2, 0.2)
-gravity_scale = 0.0
-linear_damp = 3.0
-
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/PelotaRigiBody"]
+[node name="PuntoColapso" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.41960785)
+self_modulate = Color(1, 1, 1, 0.44705883)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_riga8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/PelotaRigiBody"]
-scale = Vector2(0.2, 0.2)
+[node name="Objetivo" type="Sprite2D" parent="."]
+position = Vector2(0, -500)
+scale = Vector2(0.22989358, 0.22989358)
+texture = ExtResource("5_riga8")
+
+[node name="MarcaAzul" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0, 0.61519843, 0.61614645, 1)
+position = Vector2(184.99998, 200.99994)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_riga8")
+
+[node name="MarcaRojo" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.80758065, 0, 0.27861342, 1)
+position = Vector2(-128.99998, 190.99994)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_riga8")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 446.0
+offset_top = -534.0
+offset_right = 534.0
+offset_bottom = -485.0
+text = "Cargando...
+"

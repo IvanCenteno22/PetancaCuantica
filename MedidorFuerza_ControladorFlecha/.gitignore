@@ -1,0 +1,4 @@
+# Ignorar carpetas de caché de Godot
+.godot/
+# Ignorar archivos de importación (opcional, pero recomendado para archivos de usuario)
+*.translation
