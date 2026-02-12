@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cncb1xybfwuw1"]
+[gd_scene load_steps=11 format=3 uid="uid://cncb1xybfwuw1"]
 
 [ext_resource type="Script" uid="uid://cb06ru1i6p47i" path="res://src/ControladorFlecha.cs" id="1_avh0g"]
 [ext_resource type="Texture2D" uid="uid://bucan8vfyw8mp" path="res://Imagen/ImagenFlecha.png" id="2_4dlvo"]
 [ext_resource type="Script" uid="uid://cqyvnu6sfwyb" path="res://src/MedidorFuerza.cs" id="4_r22ry"]
 [ext_resource type="Texture2D" uid="uid://gj2h36or5xyp" path="res://Imagen/BolaPetancaCuantica.png" id="4_riga8"]
 [ext_resource type="Texture2D" uid="uid://c46jjcauxv5bq" path="res://Imagen/Diana.png" id="5_riga8"]
+[ext_resource type="PackedScene" uid="uid://l0ikv6757454" path="res://pause_menu.tscn" id="6_kdcmg"]
 
 [sub_resource type="Gradient" id="Gradient_avh0g"]
 offsets = PackedFloat32Array(0, 0.61013216, 0.6431718)
@@ -141,3 +142,5 @@ offset_right = 534.0
 offset_bottom = -485.0
 text = "Cargando...
 "
+
+[node name="PauseMenu" parent="." instance=ExtResource("6_kdcmg")]
