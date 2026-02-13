@@ -5,31 +5,33 @@ public partial class PauseMenu : CanvasLayer
 {
 	public override void _Ready()
 	{
-		// Escondemos el menú al iniciar el juego
 		Hide();
 		
-		// Asegúrate de que estos nombres existan dentro de tu escena de pausa
-		GetNode<Button>("CenterContainer/VBoxContainer/ResumeBtn").Pressed += OnResumePressed;
-		GetNode<Button>("CenterContainer/VBoxContainer/QuitBtn").Pressed += OnQuitPressed;
+		// Asegúrate de que las rutas a los nodos sean correctas en tu escena
+		var resumeBtn = GetNode<Button>("CenterContainer/VBoxContainer/ResumeBtn");
+		var quitBtn = GetNode<Button>("CenterContainer/VBoxContainer/QuitBtn");
+
+		// Conectamos las señales
+		resumeBtn.Pressed += OnResumePressed;
+		quitBtn.Pressed += OnQuitPressed;
 	}
 
 	public override void _Input(InputEvent @event)
 	{
-		if (@event.IsActionPressed("ui_cancel")) // "Esc" por defecto
+		if (@event.IsActionPressed("ui_cancel")) // Esc
 		{
+			// Opcional: Si quieres que suene también al dar a ESC, descomenta la siguiente línea:
+			// if (GestorSonidosUI.Instance != null) GestorSonidosUI.Instance.ReproducirSonidoBoton();
+			
 			TogglePause();
 		}
 	}
 
 	private void TogglePause()
 	{
-		// Pausamos o despausamos el juego
 		GetTree().Paused = !GetTree().Paused;
-		
-		// Mostramos u ocultamos este menú
 		Visible = GetTree().Paused;
 
-		// Liberamos el ratón si está pausado para poder clicar
 		if (Visible)
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 		else
@@ -38,17 +40,22 @@ public partial class PauseMenu : CanvasLayer
 
 	private void OnResumePressed()
 	{
+		// 1. Sonido
+		if (GestorSonidosUI.Instance != null)
+			GestorSonidosUI.Instance.ReproducirSonidoBoton();
+
+		// 2. Lógica
 		TogglePause();
 	}
 
 	private void OnQuitPressed()
 	{
-		
-		// IMPORTANTE: Antes de cambiar de escena, debemos quitar la pausa
-		// Si no, el menú principal aparecerá congelado.
+		// 1. Sonido
+		if (GestorSonidosUI.Instance != null)
+			GestorSonidosUI.Instance.ReproducirSonidoBoton();
+
+		// 2. Lógica crítica antes de cambiar escena
 		GetTree().Paused = false;
-		
-		// Cambiamos a la escena del menú principal
 		GetTree().ChangeSceneToFile("res://main_menu.tscn");
 	}
 }

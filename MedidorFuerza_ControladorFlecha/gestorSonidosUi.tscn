@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp4vd7w6vbt8k"]
+
+[ext_resource type="AudioStream" uid="uid://d5n6ynacom8o" path="res://Audio/AudioBotones.wav" id="1_7mufp"]
+[ext_resource type="Script" uid="uid://xwbqyo7361kl" path="res://src/GestorSonidosUI.cs" id="1_yjy2c"]
+
+[node name="GestorSonidosUI" type="Node" node_paths=PackedStringArray("AudioBoton")]
+process_mode = 3
+script = ExtResource("1_yjy2c")
+AudioBoton = NodePath("AudioBoton")
+
+[node name="AudioBoton" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_7mufp")

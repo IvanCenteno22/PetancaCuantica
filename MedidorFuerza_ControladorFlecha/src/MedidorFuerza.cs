@@ -12,17 +12,21 @@ public partial class MedidorFuerza : Node2D
 	[Export] public Line2D LineaB;
 	[Export] public string RutaSiguienteNivel = ""; 
 
+	// --- AUDIOS ---
+	[Export] public AudioStreamPlayer AudioFlecha; // Sonido tic-tac flecha
+	[Export] public AudioStreamPlayer AudioBarra;  // <--- NUEVO: Sonido carga de fuerza
+
 	[ExportGroup("Sistema de Colapso")]
 	[Export] public Sprite2D PuntoColapso; 
 	[Export] public float VelocidadOscilacion = 15.0f;
 
 	[ExportGroup("Sistema de Duelo")]
-	[Export] public Sprite2D Objetivo;     // La diana móvil
+	[Export] public Sprite2D Objetivo;      
 	[Export] public Label LabelInfo;
-	[Export] public Sprite2D MarcaAzul;   // Fantasma donde colapsó la pelota azul
-	[Export] public Sprite2D MarcaRojo;   // Fantasma donde colapsó la pelota roja
-	[Export] public Sprite2D MetaAzul;    // Donde el azul PARÓ la diana
-	[Export] public Sprite2D MetaRojo;    // Donde el rojo PARÓ la diana
+	[Export] public Sprite2D MarcaAzul;    
+	[Export] public Sprite2D MarcaRojo;    
+	[Export] public Sprite2D MetaAzul;     
+	[Export] public Sprite2D MetaRojo;     
 
 	private Vector2 _posMetaAzul;
 	private Vector2 _posMetaRojo;
@@ -43,6 +47,7 @@ public partial class MedidorFuerza : Node2D
 
 	public override void _Ready()
 	{
+		// Configuración Visual Inicial
 		BarraVisual.Visible = false;
 		PelotaA.CanSleep = true;
 		PelotaB.CanSleep = true;
@@ -62,6 +67,10 @@ public partial class MedidorFuerza : Node2D
 			linea.ZIndex = 5;
 			if (linea.Points.Length < 2) { linea.AddPoint(Vector2.Zero); linea.AddPoint(Vector2.Zero); }
 		}
+
+		// LOGICA DE INICIO: Suena la flecha, la barra callada
+		if (AudioFlecha != null) AudioFlecha.Play();
+		if (AudioBarra != null) AudioBarra.Stop();
 	}
 
 	public override void _Process(double delta)
@@ -86,6 +95,14 @@ public partial class MedidorFuerza : Node2D
 	{
 		if (_estadoActual == Estado.Apuntando)
 		{
+			// --- CAMBIO DE FASE 1: De Flecha a Barra ---
+			
+			// 1. Paramos sonido flecha
+			if (AudioFlecha != null) AudioFlecha.Stop();
+
+			// 2. Arrancamos sonido barra (carga de energía)
+			if (AudioBarra != null) AudioBarra.Play();
+
 			ScriptFlecha.Activo = false;
 			_estadoActual = Estado.CargandoFuerza;
 			BarraVisual.Visible = true;
@@ -93,10 +110,14 @@ public partial class MedidorFuerza : Node2D
 		}
 		else if (_estadoActual == Estado.CargandoFuerza)
 		{
+			// --- CAMBIO DE FASE 2: De Barra a Disparo ---
+
+			// 1. Paramos sonido barra
+			if (AudioBarra != null) AudioBarra.Stop();
+
 			_estadoActual = Estado.Lanzado;
 			LineaA.Visible = false; LineaB.Visible = false;
 			
-			// --- GUARDAR POSICIÓN DE DIANA PERSONALIZADA ---
 			if (Objetivo is Objetivo scriptObjetivo) 
 			{
 				scriptObjetivo.DetenerMovimiento();
@@ -122,6 +143,31 @@ public partial class MedidorFuerza : Node2D
 			EjecutarColapsoEnPunto();
 		}
 	}
+
+	private void OscilarBarra(float delta)
+	{
+		float paso = VelocidadCarga * delta;
+		if (_fuerzaSubiendo) {
+			BarraVisual.Value += paso;
+			if (BarraVisual.Value >= BarraVisual.MaxValue) _fuerzaSubiendo = false;
+		} else {
+			BarraVisual.Value -= paso;
+			if (BarraVisual.Value <= 0) _fuerzaSubiendo = true;
+		}
+
+		// --- TRUCO PRO: MODULAR EL TONO DEL AUDIO ---
+		// Hacemos que el sonido sea más agudo cuanto más llena esté la barra.
+		if (AudioBarra != null && AudioBarra.Playing)
+		{
+			// Calculamos un porcentaje de 0.0 a 1.0
+			float porcentaje = (float)BarraVisual.Value / (float)BarraVisual.MaxValue;
+			
+			// El tono irá de 0.8 (grave) a 1.5 (agudo)
+			AudioBarra.PitchScale = 0.8f + (porcentaje * 0.7f);
+		}
+	}
+
+	// --- RESTO DE TU CÓDIGO (Sin cambios importantes) ---
 
 	private void EjecutarColapsoEnPunto()
 	{
@@ -156,7 +202,6 @@ public partial class MedidorFuerza : Node2D
 	{
 		_estadoActual = Estado.FinDuelo;
 
-		// --- CORRECCIÓN: Calcular distancia a las metas guardadas, no a la diana móvil ---
 		float distAzul = _posFinalAzul.DistanceTo(_posMetaAzul);
 		float distRojo = _posFinalRojo.DistanceTo(_posMetaRojo);
 
@@ -174,7 +219,6 @@ public partial class MedidorFuerza : Node2D
 			}
 			else
 			{
-				// Reset total si no hay más niveles
 				_jugadorActual = 1;
 				MarcaAzul.Visible = false;
 				MarcaRojo.Visible = false;
@@ -184,8 +228,6 @@ public partial class MedidorFuerza : Node2D
 			}
 		};
 	}
-
-	// --- RESTO DE FUNCIONES (SIN CAMBIOS) ---
 
 	private void ProcesarMovimientoPunto(float delta)
 	{
@@ -209,18 +251,6 @@ public partial class MedidorFuerza : Node2D
 
 		LineaA.SetPointPosition(1, dirA * largoLinea);
 		LineaB.SetPointPosition(1, dirB * largoLinea);
-	}
-
-	private void OscilarBarra(float delta)
-	{
-		float paso = VelocidadCarga * delta;
-		if (_fuerzaSubiendo) {
-			BarraVisual.Value += paso;
-			if (BarraVisual.Value >= BarraVisual.MaxValue) _fuerzaSubiendo = false;
-		} else {
-			BarraVisual.Value -= paso;
-			if (BarraVisual.Value <= 0) _fuerzaSubiendo = true;
-		}
 	}
 
 	private void EjecutarLanzamientoCuantico()
@@ -264,8 +294,12 @@ public partial class MedidorFuerza : Node2D
 		}
 		ResetearPelotaFisica(PelotaA);
 		ResetearPelotaFisica(PelotaB);
-	}
 
+		// --- REINICIAR CICLO ---
+		if (AudioFlecha != null) AudioFlecha.Play();
+		if (AudioBarra != null) AudioBarra.Stop();
+	}
+	
 	private void ActualizarTextoTurno()
 	{
 		if (LabelInfo != null)

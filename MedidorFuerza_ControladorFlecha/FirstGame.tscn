@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://cncb1xybfwuw1"]
+[gd_scene load_steps=14 format=3 uid="uid://cncb1xybfwuw1"]
 
 [ext_resource type="Script" uid="uid://cb06ru1i6p47i" path="res://src/ControladorFlecha.cs" id="1_avh0g"]
 [ext_resource type="Texture2D" uid="uid://bucan8vfyw8mp" path="res://Imagen/ImagenFlecha.png" id="2_4dlvo"]
 [ext_resource type="Script" uid="uid://cqyvnu6sfwyb" path="res://src/MedidorFuerza.cs" id="4_r22ry"]
 [ext_resource type="Texture2D" uid="uid://gj2h36or5xyp" path="res://Imagen/BolaPetancaCuantica.png" id="4_riga8"]
+[ext_resource type="AudioStream" uid="uid://vwh3qdd3jpcs" path="res://Audio/MovimientoFlecha.wav" id="5_d45v8"]
 [ext_resource type="Texture2D" uid="uid://ba83x5qgrrtrx" path="res://Imagen/DianaBlanca.png" id="5_hitje"]
+[ext_resource type="AudioStream" uid="uid://dvyytbbqqwnih" path="res://Audio/AudioMedidorFuerza.wav" id="6_gwn7x"]
 [ext_resource type="Script" uid="uid://ds455dao685bg" path="res://Objetivo.cs" id="6_hitje"]
 [ext_resource type="PackedScene" uid="uid://l0ikv6757454" path="res://pause_menu.tscn" id="6_kdcmg"]
 
@@ -84,7 +86,7 @@ default_color = Color(1, 0.7137255, 0.7019608, 0.81960785)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -239)
 
-[node name="NodeBarraFuerza" type="Node2D" parent="." node_paths=PackedStringArray("ScriptFlecha", "BarraVisual", "PelotaA", "PelotaB", "LineaA", "LineaB", "PuntoColapso", "Objetivo", "LabelInfo", "MarcaAzul", "MarcaRojo", "MetaAzul", "MetaRojo")]
+[node name="NodeBarraFuerza" type="Node2D" parent="." node_paths=PackedStringArray("ScriptFlecha", "BarraVisual", "PelotaA", "PelotaB", "LineaA", "LineaB", "AudioFlecha", "AudioBarra", "PuntoColapso", "Objetivo", "LabelInfo", "MarcaAzul", "MarcaRojo", "MetaAzul", "MetaRojo")]
 script = ExtResource("4_r22ry")
 ScriptFlecha = NodePath("../ImagenFlechaNode/SpriteImagenFlecha")
 BarraVisual = NodePath("BarraFuerza")
@@ -93,6 +95,8 @@ PelotaB = NodePath("../Node2D/PelotaB")
 LineaA = NodePath("../Node2D/LineaProyeccionA")
 LineaB = NodePath("../Node2D/LineaProyeccionB")
 RutaSiguienteNivel = "res://SecondGame.tscn"
+AudioFlecha = NodePath("AudioStreamPlayer")
+AudioBarra = NodePath("AudioStreamPlayer2")
 PuntoColapso = NodePath("../PuntoColapso")
 VelocidadOscilacion = 12.0
 Objetivo = NodePath("../Objetivo")
@@ -112,6 +116,14 @@ value = 90.0
 fill_mode = 3
 texture_under = SubResource("GradientTexture2D_r22ry")
 texture_progress = SubResource("GradientTexture2D_hitje")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="NodeBarraFuerza"]
+stream = ExtResource("5_d45v8")
+volume_db = -20.0
+pitch_scale = 0.39
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="NodeBarraFuerza"]
+stream = ExtResource("6_gwn7x")
 
 [node name="PuntoColapso" type="Sprite2D" parent="."]
 visible = false

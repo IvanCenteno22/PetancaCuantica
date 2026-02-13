@@ -1,12 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "RYu/N0jKo7A=",
+  "dgSpecHash": "wzUcwVGQ7gw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\laura\\Documents\\GodotProjects\\PetancaCuantica\\MedidorFuerza_ControladorFlecha\\FirtsGame.csproj",
+  "projectFilePath": "C:\\Users\\Ivan Centeno\\Documents\\GitHub\\PetancaCuantica\\MedidorFuerza_ControladorFlecha\\FirtsGame.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\laura\\.nuget\\packages\\godot.sourcegenerators\\4.5.1\\godot.sourcegenerators.4.5.1.nupkg.sha512",
-    "C:\\Users\\laura\\.nuget\\packages\\godotsharp\\4.5.1\\godotsharp.4.5.1.nupkg.sha512",
-    "C:\\Users\\laura\\.nuget\\packages\\godotsharpeditor\\4.5.1\\godotsharpeditor.4.5.1.nupkg.sha512"
+    "C:\\Users\\Ivan Centeno\\.nuget\\packages\\godot.sourcegenerators\\4.5.1\\godot.sourcegenerators.4.5.1.nupkg.sha512",
+    "C:\\Users\\Ivan Centeno\\.nuget\\packages\\godotsharp\\4.5.1\\godotsharp.4.5.1.nupkg.sha512",
+    "C:\\Users\\Ivan Centeno\\.nuget\\packages\\godotsharpeditor\\4.5.1\\godotsharpeditor.4.5.1.nupkg.sha512",
+    "C:\\Users\\Ivan Centeno\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.23\\microsoft.netcore.app.ref.8.0.23.nupkg.sha512",
+    "C:\\Users\\Ivan Centeno\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.23\\microsoft.windowsdesktop.app.ref.8.0.23.nupkg.sha512",
+    "C:\\Users\\Ivan Centeno\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.23\\microsoft.aspnetcore.app.ref.8.0.23.nupkg.sha512"
   ],
   "logs": []
 }

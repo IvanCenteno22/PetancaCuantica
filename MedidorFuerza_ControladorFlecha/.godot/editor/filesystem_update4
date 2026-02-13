@@ -1,7 +1,1 @@
-res://PauseMenu.cs
-res://MainMenu.cs
-res://src/ControladorFlecha.cs
-res://src/MedidorFuerza.cs
-res://Objetivo.cs
-res://SecondGame.tscn
-res://FirstGame.tscn
+res://gestorMusica.tscn

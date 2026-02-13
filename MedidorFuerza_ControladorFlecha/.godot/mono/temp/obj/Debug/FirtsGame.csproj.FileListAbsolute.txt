@@ -16,3 +16,21 @@ C:\Users\laura\Documents\GodotProjects\PetancaCuantica\MedidorFuerza_Controlador
 C:\Users\laura\Documents\GodotProjects\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\obj\Debug\FirtsGame.pdb
 C:\Users\laura\Documents\GodotProjects\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\obj\Debug\FirtsGame.genruntimeconfig.cache
 C:\Users\laura\Documents\GodotProjects\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\obj\Debug\ref\FirtsGame.dll
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\bin\Debug\FirtsGame.deps.json
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\bin\Debug\FirtsGame.runtimeconfig.json
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\bin\Debug\FirtsGame.dll
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\bin\Debug\FirtsGame.pdb
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\obj\Debug\FirtsGame.csproj.AssemblyReference.cache
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\obj\Debug\FirtsGame.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\obj\Debug\FirtsGame.AssemblyInfoInputs.cache
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\obj\Debug\FirtsGame.AssemblyInfo.cs
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\obj\Debug\FirtsGame.csproj.CoreCompileInputs.cache
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\obj\Debug\FirtsGame.sourcelink.json
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\obj\Debug\FirtsGame.csproj.Up2Date
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\obj\Debug\FirtsGame.dll
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\obj\Debug\refint\FirtsGame.dll
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\obj\Debug\FirtsGame.pdb
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\obj\Debug\FirtsGame.genruntimeconfig.cache
+C:\Users\Ivan Centeno\Documents\GitHub\PetancaCuantica\MedidorFuerza_ControladorFlecha\.godot\mono\temp\obj\Debug\ref\FirtsGame.dll

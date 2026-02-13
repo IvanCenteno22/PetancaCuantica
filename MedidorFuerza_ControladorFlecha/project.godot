@@ -15,6 +15,11 @@ run/main_scene="uid://d2lj8exvhhcj0"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GestorMusica="*res://gestorMusica.tscn"
+GestorSonidosUi="*res://gestorSonidosUi.tscn"
+
 [display]
 
 window/size/viewport_width=1920
