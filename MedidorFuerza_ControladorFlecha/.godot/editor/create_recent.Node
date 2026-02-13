@@ -1,8 +1,8 @@
 AnimatedSprite2D
+Sprite2D
 Control
 Label      - Matches the "text" keyword.
 ColorRect
-Sprite2D
 AudioStreamPlayer
 Camera2D
 Node

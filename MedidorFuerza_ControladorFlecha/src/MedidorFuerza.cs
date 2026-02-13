@@ -8,10 +8,8 @@ public partial class MedidorFuerza : Node2D
 	[Export] public TextureProgressBar BarraVisual;
 	[Export] public RigidBody2D PelotaA;
 	[Export] public RigidBody2D PelotaB;
-	
 	[Export] public AnimatedSprite2D AnimPelotaA; 
 	[Export] public AnimatedSprite2D AnimPelotaB; 
-	
 	[Export] public Line2D LineaA;
 	[Export] public Line2D LineaB;
 	[Export] public string RutaSiguienteNivel = ""; 
@@ -23,17 +21,20 @@ public partial class MedidorFuerza : Node2D
 	[Export] public AudioStreamPlayer AudioColapso; 
 
 	[ExportGroup("Sistema de Colapso")]
-	// CAMBIO AQUÍ: Ahora es AnimatedSprite2D para que se mueva igual que las bolas
 	[Export] public AnimatedSprite2D PuntoColapso; 
 	[Export] public float VelocidadOscilacion = 15.0f;
 
 	[ExportGroup("Sistema de Duelo")]
 	[Export] public Sprite2D Objetivo;      
-	[Export] public Label LabelInfo;
+	[Export] public Label LabelInfo;       
 	[Export] public Sprite2D MarcaAzul;    
 	[Export] public Sprite2D MarcaRojo;    
 	[Export] public Sprite2D MetaAzul;     
 	[Export] public Sprite2D MetaRojo;     
+
+	// --- CAMBIO AQUÍ: Animaciones en vez de Sprites fijos ---
+	[Export] public AnimatedSprite2D AnimGanadorAzul; // Arrastra el AnimatedSprite2D "Gana Azul"
+	[Export] public AnimatedSprite2D AnimGanadorRojo; // Arrastra el AnimatedSprite2D "Gana Rojo"
 
 	private Vector2 _posMetaAzul;
 	private Vector2 _posMetaRojo;
@@ -63,6 +64,10 @@ public partial class MedidorFuerza : Node2D
 		MetaAzul.Visible = false;
 		MetaRojo.Visible = false;
 
+		// Ocultamos y paramos las animaciones de ganador al empezar
+		if (AnimGanadorAzul != null) { AnimGanadorAzul.Visible = false; AnimGanadorAzul.Stop(); }
+		if (AnimGanadorRojo != null) { AnimGanadorRojo.Visible = false; AnimGanadorRojo.Stop(); }
+
 		ActualizarTextoTurno();
 
 		foreach (Line2D linea in new[] { LineaA, LineaB })
@@ -75,12 +80,10 @@ public partial class MedidorFuerza : Node2D
 			linea.AddPoint(Vector2.Zero); 
 		}
 
-		// Frenamos animaciones al inicio
 		if (AnimPelotaA != null) { AnimPelotaA.Stop(); AnimPelotaA.Frame = 0; }
 		if (AnimPelotaB != null) { AnimPelotaB.Stop(); AnimPelotaB.Frame = 0; }
-		if (PuntoColapso != null) PuntoColapso.Stop(); // Frenamos al fantasma también
+		if (PuntoColapso != null) PuntoColapso.Stop();
 
-		// Audios
 		if (AudioFlecha != null) AudioFlecha.Play();
 		if (AudioBarra != null) AudioBarra.Stop();
 		if (AudioDisparo != null) AudioDisparo.Stop();
@@ -110,7 +113,6 @@ public partial class MedidorFuerza : Node2D
 			ProcesarMovimientoPunto((float)delta);
 		}
 
-		// Efecto Pitch Audio
 		if (_estadoActual == Estado.Lanzado && AudioDisparo != null && AudioDisparo.Playing)
 		{
 			float velocidad = PelotaA.LinearVelocity.Length();
@@ -118,7 +120,6 @@ public partial class MedidorFuerza : Node2D
 			AudioDisparo.PitchScale = Mathf.Lerp(AudioDisparo.PitchScale, nuevoPitch, (float)delta * 5.0f);
 		}
 
-		// Rotación Animaciones Bolas
 		if (_estadoActual == Estado.Lanzado)
 		{
 			if (AnimPelotaA != null && PelotaA.LinearVelocity.Length() > 5.0f)
@@ -152,7 +153,6 @@ public partial class MedidorFuerza : Node2D
 
 			_estadoActual = Estado.Lanzado;
 			LineaA.Visible = false; LineaB.Visible = false;
-			
 			if (Objetivo is Objetivo scriptObjetivo) 
 			{
 				scriptObjetivo.DetenerMovimiento();
@@ -173,9 +173,8 @@ public partial class MedidorFuerza : Node2D
 		float fuerzaActual = (float)BarraVisual.Value;
 		float dispersionRadianes = fuerzaActual * 0.008f; 
 		float largoLinea = fuerzaActual * 2.5f;
-	
-		Vector2 baseDireccion = Vector2.FromAngle(ScriptFlecha.GlobalRotation);
 		
+		Vector2 baseDireccion = Vector2.FromAngle(ScriptFlecha.GlobalRotation);
 		Vector2 dirA = baseDireccion.Rotated(-dispersionRadianes);
 		Vector2 dirB = baseDireccion.Rotated(dispersionRadianes);
 
@@ -229,20 +228,14 @@ public partial class MedidorFuerza : Node2D
 		{
 			if (AudioDisparo != null) AudioDisparo.Stop();
 			if (AudioColapso != null) AudioColapso.Play();
-			
-			// Paramos las bolas normales
 			if (AnimPelotaA != null) AnimPelotaA.Stop();
 			if (AnimPelotaB != null) AnimPelotaB.Stop();
 
 			PelotaA.SleepingStateChanged -= AlPararseLasPelotas;
 			PelotaB.SleepingStateChanged -= AlPararseLasPelotas;
-			
 			_estadoActual = Estado.EsperandoColapso;
-			
-			// ACTIVAMOS EL FANTASMA Y SU ANIMACIÓN
 			PuntoColapso.Visible = true;
-			PuntoColapso.Play(); // <--- IMPORTANTE: Que ruede la bola fantasma
-			
+			PuntoColapso.Play(); 
 			_tiempoOscilacion = 0;
 		}
 	}
@@ -268,17 +261,41 @@ public partial class MedidorFuerza : Node2D
 		}
 	}
 
+	// --- LÓGICA DE GANADOR CON ANIMACIONES ---
 	private void DeterminarGanador()
 	{
 		_estadoActual = Estado.FinDuelo;
 		float distAzul = _posFinalAzul.DistanceTo(_posMetaAzul);
 		float distRojo = _posFinalRojo.DistanceTo(_posMetaRojo);
-		string resultado = "";
-		if (distAzul < distRojo) resultado = "¡GANADOR: AZUL!";
-		else if (distRojo < distAzul) resultado = "¡GANADOR: ROJO!";
-		else resultado = "¡EMPATE!";
 
-		if (LabelInfo != null) LabelInfo.Text = resultado;
+		// Ocultamos el texto de turno
+		if (LabelInfo != null) LabelInfo.Visible = false;
+
+		if (distAzul < distRojo) 
+		{
+			// ¡GANA AZUL! 
+			if (AnimGanadorAzul != null) {
+				AnimGanadorAzul.Visible = true;
+				AnimGanadorAzul.Play(); // Arranca la animación
+			}
+		}
+		else if (distRojo < distAzul) 
+		{
+			// ¡GANA ROJO!
+			if (AnimGanadorRojo != null) {
+				AnimGanadorRojo.Visible = true;
+				AnimGanadorRojo.Play(); // Arranca la animación
+			}
+		}
+		else 
+		{
+			// EMPATE
+			if (LabelInfo != null) 
+			{
+				LabelInfo.Visible = true;
+				LabelInfo.Text = "¡EMPATE!";
+			}
+		}
 
 		GetTree().CreateTimer(3.0f).Timeout += () => {
 			if (!string.IsNullOrEmpty(RutaSiguienteNivel)) GetTree().ChangeSceneToFile(RutaSiguienteNivel);
@@ -299,6 +316,13 @@ public partial class MedidorFuerza : Node2D
 	private void ReiniciarParaSiguienteTurno()
 	{
 		_estadoActual = Estado.Apuntando;
+		
+		// Ocultamos y paramos los ganadores
+		if (AnimGanadorAzul != null) { AnimGanadorAzul.Visible = false; AnimGanadorAzul.Stop(); }
+		if (AnimGanadorRojo != null) { AnimGanadorRojo.Visible = false; AnimGanadorRojo.Stop(); }
+		
+		if (LabelInfo != null) LabelInfo.Visible = true;
+		
 		ActualizarTextoTurno();
 		ScriptFlecha.Reiniciar();
 		ScriptFlecha.Visible = true;
