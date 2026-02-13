@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Medidor_Controlador"
+config/name="PentanQuantica"
 run/main_scene="uid://d2lj8exvhhcj0"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://gj2h36or5xyp"
 
 [autoload]
 
@@ -24,7 +24,6 @@ GestorSonidosUi="*res://gestorSonidosUi.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
 
 [dotnet]
 

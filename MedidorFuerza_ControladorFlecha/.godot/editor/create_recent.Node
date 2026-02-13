@@ -1,6 +1,9 @@
 AnimatedSprite2D
-AudioStreamPlayer
+Control
+Label      - Matches the "text" keyword.
+ColorRect
 Sprite2D
+AudioStreamPlayer
 Camera2D
 Node
 AudioStreamPlayer2D

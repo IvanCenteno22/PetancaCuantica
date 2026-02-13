@@ -20,19 +20,24 @@
             "related": ".xml"
           }
         }
-      },
-      "GodotSharpEditor/4.5.1": {
+      }
+    },
+    "net8.0/win-x64": {
+      "Godot.SourceGenerators/4.5.1": {
         "type": "package",
-        "dependencies": {
-          "GodotSharp": "4.5.1"
-        },
+        "build": {
+          "build/Godot.SourceGenerators.props": {}
+        }
+      },
+      "GodotSharp/4.5.1": {
+        "type": "package",
         "compile": {
-          "lib/net8.0/GodotSharpEditor.dll": {
+          "lib/net8.0/GodotSharp.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net8.0/GodotSharpEditor.dll": {
+          "lib/net8.0/GodotSharp.dll": {
             "related": ".xml"
           }
         }
@@ -65,47 +70,41 @@
         "lib/net8.0/GodotSharp.dll",
         "lib/net8.0/GodotSharp.xml"
       ]
-    },
-    "GodotSharpEditor/4.5.1": {
-      "sha512": "8CM49047b0Us3qPJo6L7kdldreOvR7JCoXlKoSHzpA0TQP6+Qnoxz/26GZ1ONg2wW4vV9uzor0AHXSGUFP9XSw==",
-      "type": "package",
-      "path": "godotsharpeditor/4.5.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "godotsharpeditor.4.5.1.nupkg.sha512",
-        "godotsharpeditor.nuspec",
-        "lib/net8.0/GodotSharpEditor.dll",
-        "lib/net8.0/GodotSharpEditor.xml"
-      ]
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Godot.SourceGenerators >= 4.5.1",
-      "GodotSharp >= 4.5.1",
-      "GodotSharpEditor >= 4.5.1"
+      "GodotSharp >= 4.5.1"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ivan Centeno\\.nuget\\packages\\": {}
+    "C:\\Users\\laura\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ivan Centeno\\Documents\\GitHub\\PetancaCuantica\\MedidorFuerza_ControladorFlecha\\FirtsGame.csproj",
+      "projectUniqueName": "C:\\Users\\laura\\Documents\\GodotProjects\\PetancaCuantica\\MedidorFuerza_ControladorFlecha\\FirtsGame.csproj",
       "projectName": "FirtsGame",
-      "projectPath": "C:\\Users\\Ivan Centeno\\Documents\\GitHub\\PetancaCuantica\\MedidorFuerza_ControladorFlecha\\FirtsGame.csproj",
-      "packagesPath": "C:\\Users\\Ivan Centeno\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ivan Centeno\\Documents\\GitHub\\PetancaCuantica\\MedidorFuerza_ControladorFlecha\\.godot\\mono\\temp\\obj\\",
+      "projectPath": "C:\\Users\\laura\\Documents\\GodotProjects\\PetancaCuantica\\MedidorFuerza_ControladorFlecha\\FirtsGame.csproj",
+      "packagesPath": "C:\\Users\\laura\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\laura\\Documents\\GodotProjects\\PetancaCuantica\\MedidorFuerza_ControladorFlecha\\.godot\\mono\\temp\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Ivan Centeno\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\laura\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -139,11 +138,6 @@
             "target": "Package",
             "version": "[4.5.1, )",
             "autoReferenced": true
-          },
-          "GodotSharpEditor": {
-            "target": "Package",
-            "version": "[4.5.1, )",
-            "autoReferenced": true
           }
         },
         "imports": [
@@ -159,16 +153,16 @@
         "warn": true,
         "downloadDependencies": [
           {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.23, 8.0.23]"
+            "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+            "version": "[8.0.22, 8.0.22]"
           },
           {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.23, 8.0.23]"
+            "name": "Microsoft.NETCore.App.Runtime.win-x64",
+            "version": "[8.0.22, 8.0.22]"
           },
           {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[8.0.23, 8.0.23]"
+            "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
+            "version": "[8.0.22, 8.0.22]"
           }
         ],
         "frameworkReferences": {
@@ -176,7 +170,12 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.309/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
+      }
+    },
+    "runtimes": {
+      "win-x64": {
+        "#import": []
       }
     }
   }

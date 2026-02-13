@@ -173,8 +173,9 @@ public partial class MedidorFuerza : Node2D
 		float fuerzaActual = (float)BarraVisual.Value;
 		float dispersionRadianes = fuerzaActual * 0.008f; 
 		float largoLinea = fuerzaActual * 2.5f;
-
-		Vector2 baseDireccion = Vector2.Up.Rotated(ScriptFlecha.GlobalRotation);
+	
+		Vector2 baseDireccion = Vector2.FromAngle(ScriptFlecha.GlobalRotation);
+		
 		Vector2 dirA = baseDireccion.Rotated(-dispersionRadianes);
 		Vector2 dirB = baseDireccion.Rotated(dispersionRadianes);
 
@@ -212,7 +213,9 @@ public partial class MedidorFuerza : Node2D
 		if (AnimPelotaA != null) AnimPelotaA.Play();
 		if (AnimPelotaB != null) AnimPelotaB.Play();
 
-		Vector2 baseDireccion = Vector2.Up.Rotated(ScriptFlecha.Rotation);
+		float anguloCorregido = ScriptFlecha.GlobalRotation - (Mathf.Pi / 2.0f);
+		Vector2 baseDireccion = Vector2.FromAngle(anguloCorregido);
+
 		PelotaA.ApplyImpulse(baseDireccion.Rotated(-dispersion) * fuerza);
 		PelotaB.ApplyImpulse(baseDireccion.Rotated(dispersion) * (fuerza * 0.95f));
 

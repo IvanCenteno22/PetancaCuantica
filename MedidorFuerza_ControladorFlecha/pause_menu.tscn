@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=3 uid="uid://l0ikv6757454"]
+[gd_scene load_steps=123 format=3 uid="uid://dgt2ic05jnfw7"]
 
 [ext_resource type="Script" uid="uid://coxx7lg6eljcx" path="res://src/PauseMenu.cs" id="1_hdmo1"]
 [ext_resource type="Texture2D" uid="uid://hh0b6scw37g1" path="res://Imagen/TableroFrames/0001.png" id="2_h5s07"]
@@ -502,8 +502,9 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0.5137255)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-offset_right = 1158.0
-offset_bottom = 649.0
+offset_right = 961.0
+offset_bottom = 552.0
+scale = Vector2(2, 2)
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
@@ -522,7 +523,7 @@ text = "MENU"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = -10
-position = Vector2(579, 326)
-scale = Vector2(6, 6)
+position = Vector2(962.5, 539.5)
+scale = Vector2(9.994792, 9.953703)
 sprite_frames = SubResource("SpriteFrames_i314p")
 autoplay = "default"

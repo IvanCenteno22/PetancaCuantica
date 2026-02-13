@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=3 uid="uid://d2lj8exvhhcj0"]
+[gd_scene load_steps=124 format=3 uid="uid://bpxf47ugbc6ke"]
 
 [ext_resource type="Script" uid="uid://cewq8uyxosg4k" path="res://src/MainMenu.cs" id="1_7vrkn"]
 [ext_resource type="Texture2D" uid="uid://hh0b6scw37g1" path="res://Imagen/TableroFrames/0001.png" id="2_5nx46"]
@@ -502,26 +502,37 @@ script = ExtResource("1_7vrkn")
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -14.997001
-anchor_top = -10.764001
+anchor_left = 1.888
+anchor_top = 0.301
 anchor_right = 13.808001
 anchor_bottom = 4.6000004
-offset_left = -0.00061035156
-offset_top = -50.1369
-offset_right = -0.007019043
-offset_bottom = 7.7935486
+offset_left = -1121.2694
+offset_top = -777.102
+offset_right = -1233.2051
+offset_bottom = -692.97363
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(2.92, 2.92)
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer"]
+z_index = -5
+layout_mode = 2
+color = Color(1, 1, 1, 0.043137256)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
 
 [node name="start" type="Button" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(64.9, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 icon = ExtResource("2_t5l53")
 
 [node name="options" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "OPCIONES"
 
 [node name="quit" type="Button" parent="CenterContainer/VBoxContainer"]
@@ -533,7 +544,7 @@ position = Vector2(-37, -220)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = -10
-position = Vector2(-36.555603, -216.5)
-scale = Vector2(10.009258, 10.009259)
+position = Vector2(-36.556, -221.935)
+scale = Vector2(9.981, 9.981)
 sprite_frames = SubResource("SpriteFrames_4hqpb")
 autoplay = "default"

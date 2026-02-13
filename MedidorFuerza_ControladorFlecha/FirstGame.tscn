@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ba83x5qgrrtrx" path="res://Imagen/DianaBlanca.png" id="5_hitje"]
 [ext_resource type="AudioStream" uid="uid://dvyytbbqqwnih" path="res://Audio/AudioMedidorFuerza.wav" id="6_gwn7x"]
 [ext_resource type="Script" uid="uid://ds455dao685bg" path="res://src/Objetivo.cs" id="6_hitje"]
-[ext_resource type="PackedScene" uid="uid://l0ikv6757454" path="res://pause_menu.tscn" id="6_kdcmg"]
+[ext_resource type="PackedScene" uid="uid://dgt2ic05jnfw7" path="res://pause_menu.tscn" id="6_kdcmg"]
 [ext_resource type="Texture2D" uid="uid://cc0glpuv5y0mf" path="res://Imagen/AnimBola/0003.png" id="6_msv0t"]
 [ext_resource type="Texture2D" uid="uid://sgiq7d6ek52e" path="res://Imagen/AnimBola/0004.png" id="7_rlfal"]
 [ext_resource type="AudioStream" uid="uid://dl03etqgfyw0f" path="res://Audio/movimientoPelotas.wav" id="7_sl2r1"]
@@ -325,13 +325,15 @@ width = 400
 height = 2000
 
 [sub_resource type="Gradient" id="Gradient_kdcmg"]
-offsets = PackedFloat32Array(0.99779737, 1)
-colors = PackedColorArray(0.12831247, 0.37145188, 0.2623995, 1, 0.12941177, 0.37254903, 0.2627451, 1)
+offsets = PackedFloat32Array(0, 0.52693206, 0.99779737, 1)
+colors = PackedColorArray(0.6114136, 0, 0.088650756, 1, 7.6046585e-06, 0.26338902, 0.7359335, 1, 0.12831247, 0.37145188, 0.2623995, 1, 0.12941177, 0.37254903, 0.2627451, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_hitje"]
 gradient = SubResource("Gradient_kdcmg")
 width = 250
 height = 2000
+fill_from = Vector2(1, 0)
+fill_to = Vector2(1, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fso5w"]
 animations = [{
@@ -785,13 +787,36 @@ animations = [{
 
 [node name="FirstPetanca" type="Node" parent="."]
 
+[node name="Objetivo" type="Sprite2D" parent="."]
+z_index = -4
+position = Vector2(0, -500)
+scale = Vector2(0.22989358, 0.22989358)
+texture = ExtResource("5_hitje")
+script = ExtResource("6_hitje")
+
+[node name="MetaAzul" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.6431373, 1, 1, 0.81960785)
+z_index = -4
+position = Vector2(-364, 449)
+scale = Vector2(0.22989358, 0.22989358)
+texture = ExtResource("5_hitje")
+
+[node name="MetaRojo" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0.7137255, 0.7019608, 0.81960785)
+z_index = -4
+position = Vector2(-520, 449)
+scale = Vector2(0.22989358, 0.22989358)
+texture = ExtResource("5_hitje")
+
 [node name="ImagenFlechaNode" type="Node2D" parent="."]
 position = Vector2(10, -141)
 rotation = -1.5707964
 scale = Vector2(0.2767788, 0.3908139)
 
 [node name="SpriteImagenFlecha" type="Sprite2D" parent="ImagenFlechaNode"]
-position = Vector2(-953.8303, -30.705181)
+position = Vector2(-953.83, 0)
 rotation = 1.5707964
 scale = Vector2(13.413657, 15.051266)
 texture = ExtResource("1_qk8tt")
@@ -857,66 +882,59 @@ AnimPelotaB = NodePath("../pelotas/PelotaB/AnimatedSprite2D")
 LineaA = NodePath("../pelotas/LineaProyeccionA")
 LineaB = NodePath("../pelotas/LineaProyeccionB")
 RutaSiguienteNivel = "res://SecondGame.tscn"
-AudioFlecha = NodePath("AudioFlecha")
-AudioBarra = NodePath("AudioMedidorFuerza")
-AudioDisparo = NodePath("AudioDisparo")
-AudioColapso = NodePath("AudioPelotaFantasma")
+AudioFlecha = NodePath("BarraFuerza/AudioFlecha")
+AudioBarra = NodePath("BarraFuerza/AudioMedidorFuerza")
+AudioDisparo = NodePath("BarraFuerza/AudioDisparo")
+AudioColapso = NodePath("BarraFuerza/AudioPelotaFantasma")
 PuntoColapso = NodePath("../PuntoColapso")
 VelocidadOscilacion = 12.0
 Objetivo = NodePath("../Objetivo")
-LabelInfo = NodePath("../Label")
+LabelInfo = NodePath("../Control/Label")
 MarcaAzul = NodePath("../MarcaAzul")
 MarcaRojo = NodePath("../MarcaRojo")
 MetaAzul = NodePath("../MetaAzul")
 MetaRojo = NodePath("../MetaRojo")
 
 [node name="BarraFuerza" type="TextureProgressBar" parent="NodeBarraFuerza"]
-offset_left = -520.0
-offset_top = -229.0
-offset_right = 504.0
-offset_bottom = 1771.0
+offset_left = -847.485
+offset_top = -290.31
+offset_right = 176.51501
+offset_bottom = 1709.69
 scale = Vector2(0.22989358, 0.22989358)
 value = 90.0
 fill_mode = 3
 texture_under = SubResource("GradientTexture2D_r22ry")
 texture_progress = SubResource("GradientTexture2D_hitje")
 
-[node name="AudioFlecha" type="AudioStreamPlayer" parent="NodeBarraFuerza"]
+[node name="AudioFlecha" type="AudioStreamPlayer" parent="NodeBarraFuerza/BarraFuerza"]
 stream = ExtResource("5_d45v8")
 volume_db = -13.423
 pitch_scale = 0.39
 
-[node name="AudioMedidorFuerza" type="AudioStreamPlayer" parent="NodeBarraFuerza"]
+[node name="AudioMedidorFuerza" type="AudioStreamPlayer" parent="NodeBarraFuerza/BarraFuerza"]
 stream = ExtResource("6_gwn7x")
 
-[node name="AudioDisparo" type="AudioStreamPlayer" parent="NodeBarraFuerza"]
+[node name="AudioDisparo" type="AudioStreamPlayer" parent="NodeBarraFuerza/BarraFuerza"]
 stream = ExtResource("7_sl2r1")
 
-[node name="AudioPelotaFantasma" type="AudioStreamPlayer" parent="NodeBarraFuerza"]
+[node name="AudioPelotaFantasma" type="AudioStreamPlayer" parent="NodeBarraFuerza/BarraFuerza"]
 stream = ExtResource("8_jl0le")
 pitch_scale = 1.33
 
-[node name="Objetivo" type="Sprite2D" parent="."]
-z_index = 10
-position = Vector2(0, -500)
-scale = Vector2(0.22989358, 0.22989358)
-texture = ExtResource("5_hitje")
-script = ExtResource("6_hitje")
+[node name="Control" type="Control" parent="NodeBarraFuerza/BarraFuerza"]
+anchors_preset = 0
+offset_left = -120.335
+offset_top = -233.845
+offset_right = -56.66697
+offset_bottom = -206.14212
+scale = Vector2(8.95, 8.95)
 
-[node name="MetaAzul" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(0.6431373, 1, 1, 0.81960785)
-position = Vector2(-364, 449)
-scale = Vector2(0.22989358, 0.22989358)
-texture = ExtResource("5_hitje")
-
-[node name="MetaRojo" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 0.7137255, 0.7019608, 0.81960785)
-z_index = 10
-position = Vector2(-520, 449)
-scale = Vector2(0.22989358, 0.22989358)
-texture = ExtResource("5_hitje")
+[node name="Label" type="Label" parent="NodeBarraFuerza/BarraFuerza/Control"]
+layout_mode = 0
+offset_right = 861.2682
+offset_bottom = 156.594
+text = "FUERZA
+"
 
 [node name="MarcaAzul" type="Sprite2D" parent="."]
 visible = false
@@ -932,19 +950,21 @@ z_index = 10
 position = Vector2(-128.99998, 190.99994)
 texture = ExtResource("26_fhd4w")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 446.0
-offset_top = -534.0
-offset_right = 534.0
-offset_bottom = -485.0
-text = "Cargando...
-"
-
 [node name="PauseMenu" parent="." instance=ExtResource("6_kdcmg")]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -5
+offset_left = -1113.0
+offset_top = -913.0
+offset_right = 1087.0
+offset_bottom = 478.0
+color = Color(1, 1, 1, 0.043137256)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.99215686)
 z_index = -10
-position = Vector2(-0.77770996, -240.00003)
+position = Vector2(0, -241)
 scale = Vector2(9.981482, 9.981481)
 sprite_frames = SubResource("SpriteFrames_fso5w")
 autoplay = "default"
@@ -952,3 +972,19 @@ autoplay = "default"
 [node name="PuntoColapso" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_bod1y")
 autoplay = "default"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 551.745
+offset_top = -714.56
+offset_right = 639.625
+offset_bottom = -683.558
+scale = Vector2(2.645, 2.645)
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 88.0
+offset_bottom = 75.0
+text = "Cargando...
+"
