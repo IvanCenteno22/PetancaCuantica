@@ -1,6 +1,8 @@
 AudioStreamPlayer
+AnimatedSprite2D
+Sprite2D
+Camera2D
 Node
 AudioStreamPlayer2D
 Label
-Sprite2D
 Line2D

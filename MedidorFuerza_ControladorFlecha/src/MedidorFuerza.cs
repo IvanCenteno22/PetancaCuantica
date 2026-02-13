@@ -13,8 +13,10 @@ public partial class MedidorFuerza : Node2D
 	[Export] public string RutaSiguienteNivel = ""; 
 
 	// --- AUDIOS ---
-	[Export] public AudioStreamPlayer AudioFlecha; // Sonido tic-tac flecha
-	[Export] public AudioStreamPlayer AudioBarra;  // <--- NUEVO: Sonido carga de fuerza
+	[Export] public AudioStreamPlayer AudioFlecha; 
+	[Export] public AudioStreamPlayer AudioBarra; 
+	[Export] public AudioStreamPlayer AudioDisparo; 
+	[Export] public AudioStreamPlayer AudioColapso; // Sonido del fantasma
 
 	[ExportGroup("Sistema de Colapso")]
 	[Export] public Sprite2D PuntoColapso; 
@@ -47,7 +49,6 @@ public partial class MedidorFuerza : Node2D
 
 	public override void _Ready()
 	{
-		// Configuración Visual Inicial
 		BarraVisual.Visible = false;
 		PelotaA.CanSleep = true;
 		PelotaB.CanSleep = true;
@@ -62,19 +63,28 @@ public partial class MedidorFuerza : Node2D
 		foreach (Line2D linea in new[] { LineaA, LineaB })
 		{
 			linea.Visible = false;
-			linea.TopLevel = true;
-			linea.GlobalPosition = _posicionSpawn;
+			linea.TopLevel = true; 
 			linea.ZIndex = 5;
-			if (linea.Points.Length < 2) { linea.AddPoint(Vector2.Zero); linea.AddPoint(Vector2.Zero); }
+			linea.ClearPoints(); 
+			linea.AddPoint(Vector2.Zero); 
+			linea.AddPoint(Vector2.Zero); 
 		}
 
-		// LOGICA DE INICIO: Suena la flecha, la barra callada
+		// LOGICA DE INICIO AUDIO
 		if (AudioFlecha != null) AudioFlecha.Play();
 		if (AudioBarra != null) AudioBarra.Stop();
+		if (AudioDisparo != null) AudioDisparo.Stop();
+		if (AudioColapso != null) AudioColapso.Stop();
 	}
 
 	public override void _Process(double delta)
 	{
+		if (ScriptFlecha != null)
+		{
+			if (LineaA != null) LineaA.GlobalPosition = ScriptFlecha.GlobalPosition;
+			if (LineaB != null) LineaB.GlobalPosition = ScriptFlecha.GlobalPosition;
+		}
+
 		if (Input.IsActionJustPressed("ui_accept") && _estadoActual != Estado.FinDuelo && _estadoActual != Estado.ProcesandoColapso)
 		{
 			if (_estadoActual != Estado.Lanzado) AvanzarEstado();
@@ -89,18 +99,21 @@ public partial class MedidorFuerza : Node2D
 		{
 			ProcesarMovimientoPunto((float)delta);
 		}
+
+		// Efecto de frenado en el audio de disparo
+		if (_estadoActual == Estado.Lanzado && AudioDisparo != null && AudioDisparo.Playing)
+		{
+			float velocidad = PelotaA.LinearVelocity.Length();
+			float nuevoPitch = Math.Clamp(velocidad * 0.002f, 0.5f, 1.5f);
+			AudioDisparo.PitchScale = Mathf.Lerp(AudioDisparo.PitchScale, nuevoPitch, (float)delta * 5.0f);
+		}
 	}
 
 	private void AvanzarEstado()
 	{
 		if (_estadoActual == Estado.Apuntando)
 		{
-			// --- CAMBIO DE FASE 1: De Flecha a Barra ---
-			
-			// 1. Paramos sonido flecha
 			if (AudioFlecha != null) AudioFlecha.Stop();
-
-			// 2. Arrancamos sonido barra (carga de energía)
 			if (AudioBarra != null) AudioBarra.Play();
 
 			ScriptFlecha.Activo = false;
@@ -110,9 +123,6 @@ public partial class MedidorFuerza : Node2D
 		}
 		else if (_estadoActual == Estado.CargandoFuerza)
 		{
-			// --- CAMBIO DE FASE 2: De Barra a Disparo ---
-
-			// 1. Paramos sonido barra
 			if (AudioBarra != null) AudioBarra.Stop();
 
 			_estadoActual = Estado.Lanzado;
@@ -122,18 +132,8 @@ public partial class MedidorFuerza : Node2D
 			{
 				scriptObjetivo.DetenerMovimiento();
 				
-				if (_jugadorActual == 1)
-				{
-					_posMetaAzul = Objetivo.GlobalPosition;
-					MetaAzul.GlobalPosition = _posMetaAzul;
-					MetaAzul.Visible = true;
-				}
-				else
-				{
-					_posMetaRojo = Objetivo.GlobalPosition;
-					MetaRojo.GlobalPosition = _posMetaRojo;
-					MetaRojo.Visible = true;
-				}
+				if (_jugadorActual == 1) { _posMetaAzul = Objetivo.GlobalPosition; MetaAzul.GlobalPosition = _posMetaAzul; MetaAzul.Visible = true; }
+				else { _posMetaRojo = Objetivo.GlobalPosition; MetaRojo.GlobalPosition = _posMetaRojo; MetaRojo.Visible = true; }
 			}
 
 			EjecutarLanzamientoCuantico();
@@ -142,6 +142,20 @@ public partial class MedidorFuerza : Node2D
 		{
 			EjecutarColapsoEnPunto();
 		}
+	}
+
+	private void ActualizarDibujoProyeccion()
+	{
+		float fuerzaActual = (float)BarraVisual.Value;
+		float dispersionRadianes = fuerzaActual * 0.008f; 
+		float largoLinea = fuerzaActual * 2.5f;
+
+		Vector2 baseDireccion = Vector2.Up.Rotated(ScriptFlecha.GlobalRotation);
+		Vector2 dirA = baseDireccion.Rotated(-dispersionRadianes);
+		Vector2 dirB = baseDireccion.Rotated(dispersionRadianes);
+
+		LineaA.SetPointPosition(1, dirA * largoLinea);
+		LineaB.SetPointPosition(1, dirB * largoLinea);
 	}
 
 	private void OscilarBarra(float delta)
@@ -155,45 +169,72 @@ public partial class MedidorFuerza : Node2D
 			if (BarraVisual.Value <= 0) _fuerzaSubiendo = true;
 		}
 
-		// --- TRUCO PRO: MODULAR EL TONO DEL AUDIO ---
-		// Hacemos que el sonido sea más agudo cuanto más llena esté la barra.
 		if (AudioBarra != null && AudioBarra.Playing)
 		{
-			// Calculamos un porcentaje de 0.0 a 1.0
 			float porcentaje = (float)BarraVisual.Value / (float)BarraVisual.MaxValue;
-			
-			// El tono irá de 0.8 (grave) a 1.5 (agudo)
 			AudioBarra.PitchScale = 0.8f + (porcentaje * 0.7f);
 		}
 	}
 
-	// --- RESTO DE TU CÓDIGO (Sin cambios importantes) ---
+	private void EjecutarLanzamientoCuantico()
+	{
+		float fuerza = (float)BarraVisual.Value * MultiplicadorFuerza;
+		float dispersion = (float)BarraVisual.Value * 0.008f; 
+
+		PelotaA.SleepingStateChanged += AlPararseLasPelotas;
+		PelotaB.SleepingStateChanged += AlPararseLasPelotas;
+
+		if (AudioDisparo != null) 
+		{
+			AudioDisparo.PitchScale = 1.0f; 
+			AudioDisparo.Play();
+		}
+
+		Vector2 baseDireccion = Vector2.Up.Rotated(ScriptFlecha.Rotation);
+		PelotaA.ApplyImpulse(baseDireccion.Rotated(-dispersion) * fuerza);
+		PelotaB.ApplyImpulse(baseDireccion.Rotated(dispersion) * (fuerza * 0.95f));
+
+		BarraVisual.Visible = false;
+		ScriptFlecha.Visible = false;
+	}
+
+	private void AlPararseLasPelotas()
+	{
+		if (PelotaA.Sleeping && PelotaB.Sleeping)
+		{
+			if (AudioDisparo != null) AudioDisparo.Stop();
+			
+			// Arrancamos el sonido del fantasma
+			if (AudioColapso != null) AudioColapso.Play();
+
+			PelotaA.SleepingStateChanged -= AlPararseLasPelotas;
+			PelotaB.SleepingStateChanged -= AlPararseLasPelotas;
+			
+			_estadoActual = Estado.EsperandoColapso;
+			PuntoColapso.Visible = true;
+			_tiempoOscilacion = 0;
+		}
+	}
 
 	private void EjecutarColapsoEnPunto()
 	{
+		// --- ¡AQUÍ ESTÁ LA CORRECCIÓN! ---
+		// Paramos el sonido del fantasma al confirmar
+		if (AudioColapso != null) AudioColapso.Stop();
+
 		_estadoActual = Estado.ProcesandoColapso;
 		Vector2 posicionFinal = PuntoColapso.GlobalPosition;
 		PuntoColapso.Visible = false;
 
 		if (_jugadorActual == 1)
 		{
-			_posFinalAzul = posicionFinal;
-			MarcaAzul.GlobalPosition = _posFinalAzul;
-			MarcaAzul.Visible = true;
-			PelotaA.Visible = false;
-			PelotaB.Visible = false;
-
+			_posFinalAzul = posicionFinal; MarcaAzul.GlobalPosition = _posFinalAzul; MarcaAzul.Visible = true; PelotaA.Visible = false; PelotaB.Visible = false;
 			_jugadorActual = 2;
 			GetTree().CreateTimer(2.0f).Timeout += ReiniciarParaSiguienteTurno;
 		}
 		else
 		{
-			_posFinalRojo = posicionFinal;
-			MarcaRojo.GlobalPosition = _posFinalRojo;
-			MarcaRojo.Visible = true;
-			PelotaA.Visible = false;
-			PelotaB.Visible = false;
-
+			_posFinalRojo = posicionFinal; MarcaRojo.GlobalPosition = _posFinalRojo; MarcaRojo.Visible = true; PelotaA.Visible = false; PelotaB.Visible = false;
 			DeterminarGanador();
 		}
 	}
@@ -201,10 +242,8 @@ public partial class MedidorFuerza : Node2D
 	private void DeterminarGanador()
 	{
 		_estadoActual = Estado.FinDuelo;
-
 		float distAzul = _posFinalAzul.DistanceTo(_posMetaAzul);
 		float distRojo = _posFinalRojo.DistanceTo(_posMetaRojo);
-
 		string resultado = "";
 		if (distAzul < distRojo) resultado = "¡GANADOR: AZUL!";
 		else if (distRojo < distAzul) resultado = "¡GANADOR: ROJO!";
@@ -213,17 +252,9 @@ public partial class MedidorFuerza : Node2D
 		if (LabelInfo != null) LabelInfo.Text = resultado;
 
 		GetTree().CreateTimer(3.0f).Timeout += () => {
-			if (!string.IsNullOrEmpty(RutaSiguienteNivel))
-			{
-				GetTree().ChangeSceneToFile(RutaSiguienteNivel);
-			}
-			else
-			{
-				_jugadorActual = 1;
-				MarcaAzul.Visible = false;
-				MarcaRojo.Visible = false;
-				MetaAzul.Visible = false;
-				MetaRojo.Visible = false;
+			if (!string.IsNullOrEmpty(RutaSiguienteNivel)) GetTree().ChangeSceneToFile(RutaSiguienteNivel);
+			else {
+				_jugadorActual = 1; MarcaAzul.Visible = false; MarcaRojo.Visible = false; MetaAzul.Visible = false; MetaRojo.Visible = false;
 				ReiniciarParaSiguienteTurno();
 			}
 		};
@@ -236,52 +267,6 @@ public partial class MedidorFuerza : Node2D
 		PuntoColapso.GlobalPosition = PelotaA.GlobalPosition.Lerp(PelotaB.GlobalPosition, t);
 	}
 
-	private void ActualizarDibujoProyeccion()
-	{
-		float anguloBase = ScriptFlecha.GlobalRotation - (Mathf.Pi / 2.0f);
-		float fuerzaActual = (float)BarraVisual.Value;
-		float dispersionRadianes = fuerzaActual * 0.008f; 
-		float largoLinea = fuerzaActual * 2.5f;
-
-		Vector2 dirA = Vector2.Right.Rotated(anguloBase - dispersionRadianes + Mathf.Pi);
-		Vector2 dirB = Vector2.Right.Rotated(anguloBase + dispersionRadianes + Mathf.Pi);
-
-		if (LineaA.Points.Length < 2) LineaA.AddPoint(Vector2.Zero);
-		if (LineaB.Points.Length < 2) LineaB.AddPoint(Vector2.Zero);
-
-		LineaA.SetPointPosition(1, dirA * largoLinea);
-		LineaB.SetPointPosition(1, dirB * largoLinea);
-	}
-
-	private void EjecutarLanzamientoCuantico()
-	{
-		float anguloBase = ScriptFlecha.Rotation - (Mathf.Pi / 2.0f);
-		float fuerza = (float)BarraVisual.Value * MultiplicadorFuerza;
-		float dispersion = (float)BarraVisual.Value * 0.008f; 
-
-		PelotaA.SleepingStateChanged += AlPararseLasPelotas;
-		PelotaB.SleepingStateChanged += AlPararseLasPelotas;
-
-		PelotaA.ApplyImpulse(Vector2.Right.Rotated(anguloBase - dispersion) * fuerza);
-		PelotaB.ApplyImpulse(Vector2.Right.Rotated(anguloBase + dispersion) * (fuerza * 0.95f));
-
-		BarraVisual.Visible = false;
-		ScriptFlecha.Visible = false;
-	}
-
-	private void AlPararseLasPelotas()
-	{
-		if (PelotaA.Sleeping && PelotaB.Sleeping)
-		{
-			PelotaA.SleepingStateChanged -= AlPararseLasPelotas;
-			PelotaB.SleepingStateChanged -= AlPararseLasPelotas;
-			
-			_estadoActual = Estado.EsperandoColapso;
-			PuntoColapso.Visible = true;
-			_tiempoOscilacion = 0;
-		}
-	}
-
 	private void ReiniciarParaSiguienteTurno()
 	{
 		_estadoActual = Estado.Apuntando;
@@ -289,21 +274,20 @@ public partial class MedidorFuerza : Node2D
 		ScriptFlecha.Reiniciar();
 		ScriptFlecha.Visible = true;
 		BarraVisual.Value = BarraVisual.MinValue;
-		if (Objetivo is Objetivo scriptObjetivo) {
-			scriptObjetivo.ReiniciarMovimiento();
-		}
+		if (Objetivo is Objetivo scriptObjetivo) scriptObjetivo.ReiniciarMovimiento();
 		ResetearPelotaFisica(PelotaA);
 		ResetearPelotaFisica(PelotaB);
 
-		// --- REINICIAR CICLO ---
+		// REINICIAR TODOS LOS AUDIOS
 		if (AudioFlecha != null) AudioFlecha.Play();
 		if (AudioBarra != null) AudioBarra.Stop();
+		if (AudioDisparo != null) AudioDisparo.Stop();
+		if (AudioColapso != null) AudioColapso.Stop();
 	}
-	
+
 	private void ActualizarTextoTurno()
 	{
-		if (LabelInfo != null)
-			LabelInfo.Text = _jugadorActual == 1 ? "TURNO: AZUL" : "TURNO: ROJO";
+		if (LabelInfo != null) LabelInfo.Text = _jugadorActual == 1 ? "TURNO: AZUL" : "TURNO: ROJO";
 	}
 
 	private void ResetearPelotaFisica(RigidBody2D pelota)
@@ -313,7 +297,6 @@ public partial class MedidorFuerza : Node2D
 		pelota.Sleeping = false;
 		pelota.LinearVelocity = Vector2.Zero;
 		pelota.AngularVelocity = 0;
-
 		var state = PhysicsServer2D.BodyGetDirectState(pelota.GetRid());
 		if (state != null)
 		{
