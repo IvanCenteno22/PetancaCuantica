@@ -1,7 +1,8 @@
-[gd_scene load_steps=123 format=3 uid="uid://d2lj8exvhhcj0"]
+[gd_scene load_steps=124 format=3 uid="uid://d2lj8exvhhcj0"]
 
 [ext_resource type="Script" uid="uid://cewq8uyxosg4k" path="res://src/MainMenu.cs" id="1_7vrkn"]
 [ext_resource type="Texture2D" uid="uid://hh0b6scw37g1" path="res://Imagen/TableroFrames/0001.png" id="2_5nx46"]
+[ext_resource type="Texture2D" uid="uid://bcsx51nh10osb" path="res://Imagen/start.png" id="2_t5l53"]
 [ext_resource type="Texture2D" uid="uid://caca48urggv5n" path="res://Imagen/TableroFrames/0002.png" id="3_t5l53"]
 [ext_resource type="Texture2D" uid="uid://u6cu1xx3c23f" path="res://Imagen/TableroFrames/0003.png" id="4_g85f8"]
 [ext_resource type="Texture2D" uid="uid://bypt07n25iu5d" path="res://Imagen/TableroFrames/0004.png" id="5_u0qy6"]
@@ -517,7 +518,7 @@ layout_mode = 2
 
 [node name="start" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "START"
+icon = ExtResource("2_t5l53")
 
 [node name="options" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2

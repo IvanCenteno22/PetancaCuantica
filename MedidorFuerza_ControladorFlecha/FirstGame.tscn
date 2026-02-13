@@ -1,32 +1,55 @@
-[gd_scene load_steps=137 format=3 uid="uid://cncb1xybfwuw1"]
+[gd_scene load_steps=163 format=3 uid="uid://cncb1xybfwuw1"]
 
 [ext_resource type="Script" uid="uid://cb06ru1i6p47i" path="res://src/ControladorFlecha.cs" id="1_avh0g"]
 [ext_resource type="Texture2D" uid="uid://rwh5qjqnq3xd" path="res://Imagen/flecha.png" id="1_qk8tt"]
+[ext_resource type="Texture2D" uid="uid://dc36xt8jtgshj" path="res://Imagen/AnimBola/0000.png" id="3_bod1y"]
+[ext_resource type="Texture2D" uid="uid://ypg31y5gp5wk" path="res://Imagen/AnimBola/0001.png" id="4_aov8g"]
 [ext_resource type="Script" uid="uid://cqyvnu6sfwyb" path="res://src/MedidorFuerza.cs" id="4_r22ry"]
-[ext_resource type="Texture2D" uid="uid://gj2h36or5xyp" path="res://Imagen/BolaPetancaCuantica.png" id="4_riga8"]
 [ext_resource type="AudioStream" uid="uid://vwh3qdd3jpcs" path="res://Audio/MovimientoFlecha.wav" id="5_d45v8"]
+[ext_resource type="Texture2D" uid="uid://b13d8d52akkwx" path="res://Imagen/AnimBola/0002.png" id="5_gff2d"]
 [ext_resource type="Texture2D" uid="uid://ba83x5qgrrtrx" path="res://Imagen/DianaBlanca.png" id="5_hitje"]
 [ext_resource type="AudioStream" uid="uid://dvyytbbqqwnih" path="res://Audio/AudioMedidorFuerza.wav" id="6_gwn7x"]
 [ext_resource type="Script" uid="uid://ds455dao685bg" path="res://src/Objetivo.cs" id="6_hitje"]
 [ext_resource type="PackedScene" uid="uid://l0ikv6757454" path="res://pause_menu.tscn" id="6_kdcmg"]
+[ext_resource type="Texture2D" uid="uid://cc0glpuv5y0mf" path="res://Imagen/AnimBola/0003.png" id="6_msv0t"]
+[ext_resource type="Texture2D" uid="uid://sgiq7d6ek52e" path="res://Imagen/AnimBola/0004.png" id="7_rlfal"]
 [ext_resource type="AudioStream" uid="uid://dl03etqgfyw0f" path="res://Audio/movimientoPelotas.wav" id="7_sl2r1"]
 [ext_resource type="AudioStream" uid="uid://dgoy0vdt1msie" path="res://Audio/Loop.wav" id="8_jl0le"]
+[ext_resource type="Texture2D" uid="uid://b510sepygx8ld" path="res://Imagen/AnimBola/0005.png" id="8_xk1c3"]
+[ext_resource type="Texture2D" uid="uid://56e0h1x0gfwc" path="res://Imagen/AnimBola/0006.png" id="9_ha787"]
+[ext_resource type="Texture2D" uid="uid://rqbyw1emfxad" path="res://Imagen/AnimBola/0007.png" id="10_cwdpk"]
+[ext_resource type="Texture2D" uid="uid://dkjo8lro3brtq" path="res://Imagen/AnimBola/0008.png" id="11_3lq1x"]
 [ext_resource type="Texture2D" uid="uid://hh0b6scw37g1" path="res://Imagen/TableroFrames/0001.png" id="11_sl2r1"]
+[ext_resource type="Texture2D" uid="uid://dqx3lfwwyr88f" path="res://Imagen/AnimBola/0009.png" id="12_3hosl"]
 [ext_resource type="Texture2D" uid="uid://caca48urggv5n" path="res://Imagen/TableroFrames/0002.png" id="12_jl0le"]
+[ext_resource type="Texture2D" uid="uid://63iqlwrx5kno" path="res://Imagen/AnimBola/0010.png" id="13_6lyhv"]
 [ext_resource type="Texture2D" uid="uid://u6cu1xx3c23f" path="res://Imagen/TableroFrames/0003.png" id="13_gwwli"]
 [ext_resource type="Texture2D" uid="uid://bypt07n25iu5d" path="res://Imagen/TableroFrames/0004.png" id="14_dxh5l"]
+[ext_resource type="Texture2D" uid="uid://vx3fbxf2yl81" path="res://Imagen/AnimBola/0011.png" id="14_qgtjf"]
+[ext_resource type="Texture2D" uid="uid://cq26jcu7qhbe3" path="res://Imagen/AnimBola/0012.png" id="15_1umgf"]
 [ext_resource type="Texture2D" uid="uid://bhtggkf2h243l" path="res://Imagen/TableroFrames/0005.png" id="15_in5l2"]
 [ext_resource type="Texture2D" uid="uid://1g310k7uixjs" path="res://Imagen/TableroFrames/0006.png" id="16_ltsyv"]
+[ext_resource type="Texture2D" uid="uid://dis1r6mske56e" path="res://Imagen/AnimBola/0013.png" id="16_s660f"]
 [ext_resource type="Texture2D" uid="uid://btplb6sb8ualh" path="res://Imagen/TableroFrames/0007.png" id="17_nyymw"]
+[ext_resource type="Texture2D" uid="uid://dgmoqm5axdark" path="res://Imagen/AnimBola/0014.png" id="17_v6afv"]
+[ext_resource type="Texture2D" uid="uid://dln70pwi22rrc" path="res://Imagen/AnimBola/0015.png" id="18_2hlof"]
 [ext_resource type="Texture2D" uid="uid://s3or8jlna07v" path="res://Imagen/TableroFrames/0008.png" id="18_p06h3"]
+[ext_resource type="Texture2D" uid="uid://bxfbdnqs8owja" path="res://Imagen/AnimBola/0016.png" id="19_dfkg7"]
 [ext_resource type="Texture2D" uid="uid://b0w7e050igbu3" path="res://Imagen/TableroFrames/0009.png" id="19_w0082"]
 [ext_resource type="Texture2D" uid="uid://clxt1umrakden" path="res://Imagen/TableroFrames/0010.png" id="20_5wm07"]
+[ext_resource type="Texture2D" uid="uid://cf1bm8sgeqnuy" path="res://Imagen/AnimBola/0017.png" id="20_pyben"]
+[ext_resource type="Texture2D" uid="uid://bwnd2r04munt4" path="res://Imagen/AnimBola/0018.png" id="21_l5apc"]
 [ext_resource type="Texture2D" uid="uid://nmxi6n1exlip" path="res://Imagen/TableroFrames/0011.png" id="21_wpig8"]
 [ext_resource type="Texture2D" uid="uid://gac28dkm4ypp" path="res://Imagen/TableroFrames/0012.png" id="22_i1sat"]
+[ext_resource type="Texture2D" uid="uid://js2yro6edika" path="res://Imagen/AnimBola/0019.png" id="22_mac1o"]
+[ext_resource type="Texture2D" uid="uid://d2yead6a282ui" path="res://Imagen/AnimBola/0020.png" id="23_akgmv"]
 [ext_resource type="Texture2D" uid="uid://brsgl6vbt70la" path="res://Imagen/TableroFrames/0013.png" id="23_jd4q1"]
 [ext_resource type="Texture2D" uid="uid://bhexklkqxmxet" path="res://Imagen/TableroFrames/0014.png" id="24_errb5"]
+[ext_resource type="Texture2D" uid="uid://hi4a81ulfd77" path="res://Imagen/AnimBola/0021.png" id="24_qsy3h"]
+[ext_resource type="Texture2D" uid="uid://cu831087im75h" path="res://Imagen/AnimBola/0022.png" id="25_d77bx"]
 [ext_resource type="Texture2D" uid="uid://c0vbfcdcxj51t" path="res://Imagen/TableroFrames/0015.png" id="25_nk467"]
 [ext_resource type="Texture2D" uid="uid://del68oh4jc1dy" path="res://Imagen/TableroFrames/0016.png" id="26_cqwtd"]
+[ext_resource type="Texture2D" uid="uid://cpryobegriyig" path="res://Imagen/AnimBola/0023.png" id="26_fhd4w"]
 [ext_resource type="Texture2D" uid="uid://c7wqpvfb6n77c" path="res://Imagen/TableroFrames/0017.png" id="27_xv2pm"]
 [ext_resource type="Texture2D" uid="uid://bhpyljkolixvb" path="res://Imagen/TableroFrames/0018.png" id="28_uxnpx"]
 [ext_resource type="Texture2D" uid="uid://cmjjmumij2wlq" path="res://Imagen/TableroFrames/0019.png" id="29_8o63e"]
@@ -131,6 +154,166 @@
 [ext_resource type="Texture2D" uid="uid://b37t6d6tfifb1" path="res://Imagen/TableroFrames/0118.png" id="128_ljmry"]
 [ext_resource type="Texture2D" uid="uid://b8dudtkhtigba" path="res://Imagen/TableroFrames/0119.png" id="129_kptgc"]
 [ext_resource type="Texture2D" uid="uid://bqdseqw14gixc" path="res://Imagen/TableroFrames/0120.png" id="130_2xk5d"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mkfu2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bod1y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_aov8g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_gff2d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_msv0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rlfal")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xk1c3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ha787")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_cwdpk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_3lq1x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_3hosl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_6lyhv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_qgtjf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_1umgf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_s660f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_v6afv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_2hlof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_dfkg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_pyben")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_l5apc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_mac1o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_akgmv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_qsy3h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_d77bx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_fhd4w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 14.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nuwjk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bod1y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_aov8g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_gff2d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_msv0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rlfal")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xk1c3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ha787")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_cwdpk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_3lq1x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_3hosl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_6lyhv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_qgtjf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_1umgf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_s660f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_v6afv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_2hlof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_dfkg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_pyben")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_l5apc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_mac1o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_akgmv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_qsy3h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_d77bx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_fhd4w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 14.0
+}]
 
 [sub_resource type="Gradient" id="Gradient_avh0g"]
 offsets = PackedFloat32Array(0, 0.61013216, 0.6431718)
@@ -518,6 +701,86 @@ animations = [{
 "speed": 16.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_bod1y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bod1y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_aov8g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_gff2d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_msv0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rlfal")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xk1c3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ha787")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_cwdpk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_3lq1x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_3hosl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_6lyhv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_qgtjf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_1umgf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_s660f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_v6afv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_2hlof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_dfkg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_pyben")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_l5apc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_mac1o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_akgmv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_qsy3h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_d77bx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_fhd4w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 14.0
+}]
+
 [node name="FlechaPivot" type="Node2D"]
 
 [node name="FirstPetanca" type="Node" parent="."]
@@ -535,43 +798,45 @@ texture = ExtResource("1_qk8tt")
 script = ExtResource("1_avh0g")
 AnguloInicial = 90.0
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="pelotas" type="Node2D" parent="."]
 scale = Vector2(0.09, 0.09)
 
-[node name="PelotaA" type="RigidBody2D" parent="Node2D"]
+[node name="PelotaA" type="RigidBody2D" parent="pelotas"]
 position = Vector2(0, 2855.5552)
 scale = Vector2(0.2, 0.2)
 gravity_scale = 0.0
 linear_damp = 3.0
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/PelotaA"]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_riga8")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/PelotaA"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pelotas/PelotaA"]
 scale = Vector2(0.2, 0.2)
 
-[node name="PelotaB" type="RigidBody2D" parent="Node2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="pelotas/PelotaA"]
+sprite_frames = SubResource("SpriteFrames_mkfu2")
+autoplay = "default"
+frame = 11
+frame_progress = 0.75277627
+
+[node name="PelotaB" type="RigidBody2D" parent="pelotas"]
 position = Vector2(0, 2855.555)
 scale = Vector2(0.2, 0.2)
 gravity_scale = 0.0
 linear_damp = 3.0
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/PelotaB"]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_riga8")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/PelotaB"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pelotas/PelotaB"]
 scale = Vector2(0.2, 0.2)
 
-[node name="LineaProyeccionA" type="Line2D" parent="Node2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="pelotas/PelotaB"]
+sprite_frames = SubResource("SpriteFrames_nuwjk")
+autoplay = "default"
+
+[node name="LineaProyeccionA" type="Line2D" parent="pelotas"]
 position = Vector2(-9.111112, -742.44446)
 rotation = -1.5707964
 points = PackedVector2Array(0, 0, 0, 0)
 width = 2.0
 default_color = Color(0.6431373, 1, 1, 0.81960785)
 
-[node name="LineaProyeccionB" type="Line2D" parent="Node2D"]
+[node name="LineaProyeccionB" type="Line2D" parent="pelotas"]
 position = Vector2(-9.111112, -742.44446)
 rotation = -1.5707964
 points = PackedVector2Array(0, 0, 0, 0)
@@ -581,14 +846,16 @@ default_color = Color(1, 0.7137255, 0.7019608, 0.81960785)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -239)
 
-[node name="NodeBarraFuerza" type="Node2D" parent="." node_paths=PackedStringArray("ScriptFlecha", "BarraVisual", "PelotaA", "PelotaB", "LineaA", "LineaB", "AudioFlecha", "AudioBarra", "AudioDisparo", "AudioColapso", "PuntoColapso", "Objetivo", "LabelInfo", "MarcaAzul", "MarcaRojo", "MetaAzul", "MetaRojo")]
+[node name="NodeBarraFuerza" type="Node2D" parent="." node_paths=PackedStringArray("ScriptFlecha", "BarraVisual", "PelotaA", "PelotaB", "AnimPelotaA", "AnimPelotaB", "LineaA", "LineaB", "AudioFlecha", "AudioBarra", "AudioDisparo", "AudioColapso", "PuntoColapso", "Objetivo", "LabelInfo", "MarcaAzul", "MarcaRojo", "MetaAzul", "MetaRojo")]
 script = ExtResource("4_r22ry")
 ScriptFlecha = NodePath("../ImagenFlechaNode/SpriteImagenFlecha")
 BarraVisual = NodePath("BarraFuerza")
-PelotaA = NodePath("../Node2D/PelotaA")
-PelotaB = NodePath("../Node2D/PelotaB")
-LineaA = NodePath("../Node2D/LineaProyeccionA")
-LineaB = NodePath("../Node2D/LineaProyeccionB")
+PelotaA = NodePath("../pelotas/PelotaA")
+PelotaB = NodePath("../pelotas/PelotaB")
+AnimPelotaA = NodePath("../pelotas/PelotaA/AnimatedSprite2D")
+AnimPelotaB = NodePath("../pelotas/PelotaB/AnimatedSprite2D")
+LineaA = NodePath("../pelotas/LineaProyeccionA")
+LineaB = NodePath("../pelotas/LineaProyeccionB")
 RutaSiguienteNivel = "res://SecondGame.tscn"
 AudioFlecha = NodePath("AudioFlecha")
 AudioBarra = NodePath("AudioMedidorFuerza")
@@ -629,13 +896,6 @@ stream = ExtResource("7_sl2r1")
 stream = ExtResource("8_jl0le")
 pitch_scale = 1.33
 
-[node name="PuntoColapso" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.41960785)
-self_modulate = Color(1, 1, 1, 0.44705883)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_riga8")
-
 [node name="Objetivo" type="Sprite2D" parent="."]
 z_index = 10
 position = Vector2(0, -500)
@@ -663,16 +923,14 @@ visible = false
 modulate = Color(0, 0.61519843, 0.61614645, 1)
 z_index = 10
 position = Vector2(184.99998, 200.99994)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_riga8")
+texture = ExtResource("26_fhd4w")
 
 [node name="MarcaRojo" type="Sprite2D" parent="."]
 visible = false
 modulate = Color(0.80758065, 0, 0.27861342, 1)
 z_index = 10
 position = Vector2(-128.99998, 190.99994)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_riga8")
+texture = ExtResource("26_fhd4w")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 446.0
@@ -689,4 +947,8 @@ z_index = -10
 position = Vector2(-0.77770996, -240.00003)
 scale = Vector2(9.981482, 9.981481)
 sprite_frames = SubResource("SpriteFrames_fso5w")
+autoplay = "default"
+
+[node name="PuntoColapso" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bod1y")
 autoplay = "default"

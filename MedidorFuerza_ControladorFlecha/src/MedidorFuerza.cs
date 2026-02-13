@@ -8,6 +8,10 @@ public partial class MedidorFuerza : Node2D
 	[Export] public TextureProgressBar BarraVisual;
 	[Export] public RigidBody2D PelotaA;
 	[Export] public RigidBody2D PelotaB;
+	
+	[Export] public AnimatedSprite2D AnimPelotaA; 
+	[Export] public AnimatedSprite2D AnimPelotaB; 
+	
 	[Export] public Line2D LineaA;
 	[Export] public Line2D LineaB;
 	[Export] public string RutaSiguienteNivel = ""; 
@@ -16,10 +20,11 @@ public partial class MedidorFuerza : Node2D
 	[Export] public AudioStreamPlayer AudioFlecha; 
 	[Export] public AudioStreamPlayer AudioBarra; 
 	[Export] public AudioStreamPlayer AudioDisparo; 
-	[Export] public AudioStreamPlayer AudioColapso; // Sonido del fantasma
+	[Export] public AudioStreamPlayer AudioColapso; 
 
 	[ExportGroup("Sistema de Colapso")]
-	[Export] public Sprite2D PuntoColapso; 
+	// CAMBIO AQUÍ: Ahora es AnimatedSprite2D para que se mueva igual que las bolas
+	[Export] public AnimatedSprite2D PuntoColapso; 
 	[Export] public float VelocidadOscilacion = 15.0f;
 
 	[ExportGroup("Sistema de Duelo")]
@@ -70,7 +75,12 @@ public partial class MedidorFuerza : Node2D
 			linea.AddPoint(Vector2.Zero); 
 		}
 
-		// LOGICA DE INICIO AUDIO
+		// Frenamos animaciones al inicio
+		if (AnimPelotaA != null) { AnimPelotaA.Stop(); AnimPelotaA.Frame = 0; }
+		if (AnimPelotaB != null) { AnimPelotaB.Stop(); AnimPelotaB.Frame = 0; }
+		if (PuntoColapso != null) PuntoColapso.Stop(); // Frenamos al fantasma también
+
+		// Audios
 		if (AudioFlecha != null) AudioFlecha.Play();
 		if (AudioBarra != null) AudioBarra.Stop();
 		if (AudioDisparo != null) AudioDisparo.Stop();
@@ -100,12 +110,27 @@ public partial class MedidorFuerza : Node2D
 			ProcesarMovimientoPunto((float)delta);
 		}
 
-		// Efecto de frenado en el audio de disparo
+		// Efecto Pitch Audio
 		if (_estadoActual == Estado.Lanzado && AudioDisparo != null && AudioDisparo.Playing)
 		{
 			float velocidad = PelotaA.LinearVelocity.Length();
 			float nuevoPitch = Math.Clamp(velocidad * 0.002f, 0.5f, 1.5f);
 			AudioDisparo.PitchScale = Mathf.Lerp(AudioDisparo.PitchScale, nuevoPitch, (float)delta * 5.0f);
+		}
+
+		// Rotación Animaciones Bolas
+		if (_estadoActual == Estado.Lanzado)
+		{
+			if (AnimPelotaA != null && PelotaA.LinearVelocity.Length() > 5.0f)
+			{
+				AnimPelotaA.GlobalRotation = PelotaA.LinearVelocity.Angle();
+				AnimPelotaA.SpeedScale = PelotaA.LinearVelocity.Length() * 0.005f; 
+			}
+			if (AnimPelotaB != null && PelotaB.LinearVelocity.Length() > 5.0f)
+			{
+				AnimPelotaB.GlobalRotation = PelotaB.LinearVelocity.Angle();
+				AnimPelotaB.SpeedScale = PelotaB.LinearVelocity.Length() * 0.005f;
+			}
 		}
 	}
 
@@ -131,7 +156,6 @@ public partial class MedidorFuerza : Node2D
 			if (Objetivo is Objetivo scriptObjetivo) 
 			{
 				scriptObjetivo.DetenerMovimiento();
-				
 				if (_jugadorActual == 1) { _posMetaAzul = Objetivo.GlobalPosition; MetaAzul.GlobalPosition = _posMetaAzul; MetaAzul.Visible = true; }
 				else { _posMetaRojo = Objetivo.GlobalPosition; MetaRojo.GlobalPosition = _posMetaRojo; MetaRojo.Visible = true; }
 			}
@@ -184,11 +208,9 @@ public partial class MedidorFuerza : Node2D
 		PelotaA.SleepingStateChanged += AlPararseLasPelotas;
 		PelotaB.SleepingStateChanged += AlPararseLasPelotas;
 
-		if (AudioDisparo != null) 
-		{
-			AudioDisparo.PitchScale = 1.0f; 
-			AudioDisparo.Play();
-		}
+		if (AudioDisparo != null) { AudioDisparo.PitchScale = 1.0f; AudioDisparo.Play(); }
+		if (AnimPelotaA != null) AnimPelotaA.Play();
+		if (AnimPelotaB != null) AnimPelotaB.Play();
 
 		Vector2 baseDireccion = Vector2.Up.Rotated(ScriptFlecha.Rotation);
 		PelotaA.ApplyImpulse(baseDireccion.Rotated(-dispersion) * fuerza);
@@ -203,23 +225,27 @@ public partial class MedidorFuerza : Node2D
 		if (PelotaA.Sleeping && PelotaB.Sleeping)
 		{
 			if (AudioDisparo != null) AudioDisparo.Stop();
-			
-			// Arrancamos el sonido del fantasma
 			if (AudioColapso != null) AudioColapso.Play();
+			
+			// Paramos las bolas normales
+			if (AnimPelotaA != null) AnimPelotaA.Stop();
+			if (AnimPelotaB != null) AnimPelotaB.Stop();
 
 			PelotaA.SleepingStateChanged -= AlPararseLasPelotas;
 			PelotaB.SleepingStateChanged -= AlPararseLasPelotas;
 			
 			_estadoActual = Estado.EsperandoColapso;
+			
+			// ACTIVAMOS EL FANTASMA Y SU ANIMACIÓN
 			PuntoColapso.Visible = true;
+			PuntoColapso.Play(); // <--- IMPORTANTE: Que ruede la bola fantasma
+			
 			_tiempoOscilacion = 0;
 		}
 	}
 
 	private void EjecutarColapsoEnPunto()
 	{
-		// --- ¡AQUÍ ESTÁ LA CORRECCIÓN! ---
-		// Paramos el sonido del fantasma al confirmar
 		if (AudioColapso != null) AudioColapso.Stop();
 
 		_estadoActual = Estado.ProcesandoColapso;
@@ -278,11 +304,15 @@ public partial class MedidorFuerza : Node2D
 		ResetearPelotaFisica(PelotaA);
 		ResetearPelotaFisica(PelotaB);
 
-		// REINICIAR TODOS LOS AUDIOS
+		// REINICIAR TODO
 		if (AudioFlecha != null) AudioFlecha.Play();
 		if (AudioBarra != null) AudioBarra.Stop();
 		if (AudioDisparo != null) AudioDisparo.Stop();
 		if (AudioColapso != null) AudioColapso.Stop();
+
+		if (AnimPelotaA != null) { AnimPelotaA.Stop(); AnimPelotaA.Frame = 0; }
+		if (AnimPelotaB != null) { AnimPelotaB.Stop(); AnimPelotaB.Frame = 0; }
+		if (PuntoColapso != null) PuntoColapso.Stop();
 	}
 
 	private void ActualizarTextoTurno()

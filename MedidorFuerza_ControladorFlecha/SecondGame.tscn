@@ -1,8 +1,7 @@
-[gd_scene load_steps=138 format=3 uid="uid://b24wn51a4o8gc"]
+[gd_scene load_steps=164 format=3 uid="uid://b24wn51a4o8gc"]
 
-[ext_resource type="Texture2D" uid="uid://bucan8vfyw8mp" path="res://Imagen/ImagenFlecha.png" id="1_yoxlh"]
+[ext_resource type="Texture2D" uid="uid://rwh5qjqnq3xd" path="res://Imagen/flecha.png" id="1_ku7n7"]
 [ext_resource type="Script" uid="uid://cb06ru1i6p47i" path="res://src/ControladorFlecha.cs" id="2_rmqyk"]
-[ext_resource type="Texture2D" uid="uid://gj2h36or5xyp" path="res://Imagen/BolaPetancaCuantica.png" id="3_kin1m"]
 [ext_resource type="Script" uid="uid://cqyvnu6sfwyb" path="res://src/MedidorFuerza.cs" id="4_lgr2f"]
 [ext_resource type="Texture2D" uid="uid://c46jjcauxv5bq" path="res://Imagen/Diana.png" id="5_f6gef"]
 [ext_resource type="AudioStream" uid="uid://vwh3qdd3jpcs" path="res://Audio/MovimientoFlecha.wav" id="5_lgr2f"]
@@ -12,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://dl03etqgfyw0f" path="res://Audio/movimientoPelotas.wav" id="7_64twt"]
 [ext_resource type="Texture2D" uid="uid://ba83x5qgrrtrx" path="res://Imagen/DianaBlanca.png" id="8_kin1m"]
 [ext_resource type="AudioStream" uid="uid://dgoy0vdt1msie" path="res://Audio/Loop.wav" id="8_px38w"]
+[ext_resource type="Texture2D" uid="uid://cpryobegriyig" path="res://Imagen/AnimBola/0023.png" id="11_ftb8g"]
 [ext_resource type="Texture2D" uid="uid://hh0b6scw37g1" path="res://Imagen/TableroFrames/0001.png" id="11_vti8m"]
 [ext_resource type="Texture2D" uid="uid://caca48urggv5n" path="res://Imagen/TableroFrames/0002.png" id="12_64twt"]
 [ext_resource type="Texture2D" uid="uid://u6cu1xx3c23f" path="res://Imagen/TableroFrames/0003.png" id="13_px38w"]
@@ -132,6 +132,189 @@
 [ext_resource type="Texture2D" uid="uid://b37t6d6tfifb1" path="res://Imagen/TableroFrames/0118.png" id="128_rfq7w"]
 [ext_resource type="Texture2D" uid="uid://b8dudtkhtigba" path="res://Imagen/TableroFrames/0119.png" id="129_jeo17"]
 [ext_resource type="Texture2D" uid="uid://bqdseqw14gixc" path="res://Imagen/TableroFrames/0120.png" id="130_uortp"]
+[ext_resource type="Texture2D" uid="uid://dc36xt8jtgshj" path="res://Imagen/AnimBola/0000.png" id="134_g4g18"]
+[ext_resource type="Texture2D" uid="uid://ypg31y5gp5wk" path="res://Imagen/AnimBola/0001.png" id="135_d7rsy"]
+[ext_resource type="Texture2D" uid="uid://b13d8d52akkwx" path="res://Imagen/AnimBola/0002.png" id="136_2b7s2"]
+[ext_resource type="Texture2D" uid="uid://cc0glpuv5y0mf" path="res://Imagen/AnimBola/0003.png" id="137_h5sxv"]
+[ext_resource type="Texture2D" uid="uid://sgiq7d6ek52e" path="res://Imagen/AnimBola/0004.png" id="138_anvct"]
+[ext_resource type="Texture2D" uid="uid://b510sepygx8ld" path="res://Imagen/AnimBola/0005.png" id="139_hvjah"]
+[ext_resource type="Texture2D" uid="uid://56e0h1x0gfwc" path="res://Imagen/AnimBola/0006.png" id="140_b5tbs"]
+[ext_resource type="Texture2D" uid="uid://rqbyw1emfxad" path="res://Imagen/AnimBola/0007.png" id="141_a07mv"]
+[ext_resource type="Texture2D" uid="uid://dkjo8lro3brtq" path="res://Imagen/AnimBola/0008.png" id="142_yuy8k"]
+[ext_resource type="Texture2D" uid="uid://dqx3lfwwyr88f" path="res://Imagen/AnimBola/0009.png" id="143_nk8hi"]
+[ext_resource type="Texture2D" uid="uid://63iqlwrx5kno" path="res://Imagen/AnimBola/0010.png" id="144_28se1"]
+[ext_resource type="Texture2D" uid="uid://vx3fbxf2yl81" path="res://Imagen/AnimBola/0011.png" id="145_u44gv"]
+[ext_resource type="Texture2D" uid="uid://cq26jcu7qhbe3" path="res://Imagen/AnimBola/0012.png" id="146_dvfom"]
+[ext_resource type="Texture2D" uid="uid://dis1r6mske56e" path="res://Imagen/AnimBola/0013.png" id="147_k8mmb"]
+[ext_resource type="Texture2D" uid="uid://dgmoqm5axdark" path="res://Imagen/AnimBola/0014.png" id="148_03xfq"]
+[ext_resource type="Texture2D" uid="uid://dln70pwi22rrc" path="res://Imagen/AnimBola/0015.png" id="149_qvxkt"]
+[ext_resource type="Texture2D" uid="uid://bxfbdnqs8owja" path="res://Imagen/AnimBola/0016.png" id="150_0olsa"]
+[ext_resource type="Texture2D" uid="uid://cf1bm8sgeqnuy" path="res://Imagen/AnimBola/0017.png" id="151_jm03c"]
+[ext_resource type="Texture2D" uid="uid://bwnd2r04munt4" path="res://Imagen/AnimBola/0018.png" id="152_jobwp"]
+[ext_resource type="Texture2D" uid="uid://js2yro6edika" path="res://Imagen/AnimBola/0019.png" id="153_cn28j"]
+[ext_resource type="Texture2D" uid="uid://d2yead6a282ui" path="res://Imagen/AnimBola/0020.png" id="154_7tyem"]
+[ext_resource type="Texture2D" uid="uid://hi4a81ulfd77" path="res://Imagen/AnimBola/0021.png" id="155_krr5q"]
+[ext_resource type="Texture2D" uid="uid://cu831087im75h" path="res://Imagen/AnimBola/0022.png" id="156_iwrum"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ku7n7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("134_g4g18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("135_d7rsy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("136_2b7s2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("137_h5sxv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("138_anvct")
+}, {
+"duration": 1.0,
+"texture": ExtResource("139_hvjah")
+}, {
+"duration": 1.0,
+"texture": ExtResource("140_b5tbs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("141_a07mv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("142_yuy8k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("143_nk8hi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("144_28se1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("145_u44gv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("146_dvfom")
+}, {
+"duration": 1.0,
+"texture": ExtResource("147_k8mmb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("148_03xfq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("149_qvxkt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("150_0olsa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("151_jm03c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("152_jobwp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("153_cn28j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("154_7tyem")
+}, {
+"duration": 1.0,
+"texture": ExtResource("155_krr5q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("156_iwrum")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ftb8g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 14.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ftb8g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("134_g4g18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("135_d7rsy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("136_2b7s2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("137_h5sxv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("138_anvct")
+}, {
+"duration": 1.0,
+"texture": ExtResource("139_hvjah")
+}, {
+"duration": 1.0,
+"texture": ExtResource("140_b5tbs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("141_a07mv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("142_yuy8k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("143_nk8hi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("144_28se1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("145_u44gv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("146_dvfom")
+}, {
+"duration": 1.0,
+"texture": ExtResource("147_k8mmb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("148_03xfq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("149_qvxkt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("150_0olsa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("151_jm03c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("152_jobwp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("153_cn28j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("154_7tyem")
+}, {
+"duration": 1.0,
+"texture": ExtResource("155_krr5q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("156_iwrum")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ftb8g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 14.0
+}]
 
 [sub_resource type="Gradient" id="Gradient_avh0g"]
 offsets = PackedFloat32Array(0, 0.61013216, 0.6431718)
@@ -519,6 +702,86 @@ animations = [{
 "speed": 16.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_hvspd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("134_g4g18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("135_d7rsy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("136_2b7s2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("137_h5sxv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("138_anvct")
+}, {
+"duration": 1.0,
+"texture": ExtResource("139_hvjah")
+}, {
+"duration": 1.0,
+"texture": ExtResource("140_b5tbs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("141_a07mv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("142_yuy8k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("143_nk8hi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("144_28se1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("145_u44gv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("146_dvfom")
+}, {
+"duration": 1.0,
+"texture": ExtResource("147_k8mmb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("148_03xfq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("149_qvxkt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("150_0olsa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("151_jm03c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("152_jobwp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("153_cn28j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("154_7tyem")
+}, {
+"duration": 1.0,
+"texture": ExtResource("155_krr5q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("156_iwrum")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ftb8g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 16.0
+}]
+
 [node name="FlechaPivot" type="Node2D"]
 
 [node name="FirstPetanca" type="Node" parent="."]
@@ -530,7 +793,7 @@ scale = Vector2(0.2767788, 0.3908139)
 
 [node name="SpriteImagenFlecha" type="Sprite2D" parent="ImagenFlechaNode"]
 scale = Vector2(0.99999994, 0.99999994)
-texture = ExtResource("1_yoxlh")
+texture = ExtResource("1_ku7n7")
 script = ExtResource("2_rmqyk")
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -541,24 +804,24 @@ scale = Vector2(0.2, 0.2)
 gravity_scale = 0.0
 linear_damp = 3.0
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/PelotaA"]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_kin1m")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/PelotaA"]
 scale = Vector2(0.2, 0.2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D/PelotaA"]
+sprite_frames = SubResource("SpriteFrames_ku7n7")
+autoplay = "default"
 
 [node name="PelotaB" type="RigidBody2D" parent="Node2D"]
 scale = Vector2(0.2, 0.2)
 gravity_scale = 0.0
 linear_damp = 3.0
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/PelotaB"]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_kin1m")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/PelotaB"]
 scale = Vector2(0.2, 0.2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D/PelotaB"]
+sprite_frames = SubResource("SpriteFrames_ftb8g")
+autoplay = "default"
 
 [node name="LineaProyeccionA" type="Line2D" parent="Node2D"]
 position = Vector2(-9.111112, -742.44446)
@@ -588,7 +851,7 @@ LineaB = NodePath("../Node2D/LineaProyeccionB")
 AudioFlecha = NodePath("BarraFuerza/AudioFlecha")
 AudioBarra = NodePath("BarraFuerza/AudioMedidorFuerza")
 AudioDisparo = NodePath("BarraFuerza/MovimientoPelotas")
-PuntoColapso = NodePath("../PuntoColapso")
+PuntoColapso = NodePath("")
 VelocidadOscilacion = 12.0
 Objetivo = NodePath("../Objetivo")
 LabelInfo = NodePath("../Label")
@@ -623,13 +886,6 @@ stream = ExtResource("7_64twt")
 stream = ExtResource("8_px38w")
 pitch_scale = 1.33
 
-[node name="PuntoColapso" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.41960785)
-self_modulate = Color(1, 1, 1, 0.44705883)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_kin1m")
-
 [node name="Objetivo" type="Sprite2D" parent="."]
 position = Vector2(0, -500)
 scale = Vector2(0.22989358, 0.22989358)
@@ -641,15 +897,13 @@ SeMueve = true
 visible = false
 modulate = Color(0, 0.61519843, 0.61614645, 1)
 position = Vector2(184.99998, 200.99994)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_kin1m")
+texture = ExtResource("11_ftb8g")
 
 [node name="MarcaRojo" type="Sprite2D" parent="."]
 visible = false
 modulate = Color(0.80758065, 0, 0.27861342, 1)
 position = Vector2(-128.99998, 190.99994)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_kin1m")
+texture = ExtResource("11_ftb8g")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 446.0
@@ -680,4 +934,8 @@ z_index = -10
 position = Vector2(-0.77770996, -240.00003)
 scale = Vector2(9.981482, 9.981481)
 sprite_frames = SubResource("SpriteFrames_iofta")
+autoplay = "default"
+
+[node name="PuntoColapso" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hvspd")
 autoplay = "default"
